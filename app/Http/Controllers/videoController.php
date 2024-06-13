@@ -62,7 +62,6 @@ class videoController extends Controller
             $videos->save();
         }
         Alert::success('Cadastrado', 'Vídeo cadastrado com sucesso');
-        //return $banners;
 
         return redirect('videos/listar_videos');
 
@@ -124,7 +123,7 @@ class videoController extends Controller
 
             $videos->save();
         }
-        Alert::success('Cadastrado', 'Vídeo cadastrado com sucesso');
+        Alert::success('Actualizado', 'Vídeo Actualizado com sucesso');
         //return $banners;
 
         return redirect('videos/listar_videos');

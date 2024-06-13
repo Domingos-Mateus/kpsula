@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('link_video');
+            $table->string('imagem')->nullable();
             $table->string('nome_video');
+            $table->string('modulo_id')->nullable();
             $table->string('descricao')->nullable();
             $table->timestamps();
         });

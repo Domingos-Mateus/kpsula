@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Modulos;
 use Illuminate\Http\Request;
-use File;
 use Alert;
 
 
@@ -40,7 +39,7 @@ class ModulosController extends Controller
         $modulos->descricao = $request->descricao;
 
         $modulos->save();
-
+        Alert::success('Cadastrado', 'módulo cadastrado com sucesso');
         return redirect('modulos/listar_modulos');
     }
 
@@ -75,6 +74,7 @@ class ModulosController extends Controller
         $modulos->descricao = $request->descricao;
 
         $modulos->save();
+        Alert::success('Actualizado', 'módulo Actualizado com sucesso');
 
         return redirect('modulos/listar_modulos');
     }

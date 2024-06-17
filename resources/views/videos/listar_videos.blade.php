@@ -42,7 +42,7 @@
                                             <a href="{{ url('/videos/visualizar_video/'.$video->id) }}" class="btn btn-primary btn-sm">Visualizar</a>
                                             <!-- Botão de Eliminar -->
 
-                                                <a href="eliminar_video/{{ $video->id }}"><button type="submit" class="btn btn-danger btn-sm">Eliminar</button></a>
+                                            <a href="eliminar_video/{{ $video->id }}"><button type="submit" class="btn btn-danger btn-sm">Eliminar</button></a>
 
                                         </div>
                                     </div>

@@ -29,9 +29,11 @@
                             @endif
 
                             <!-- Botão para adicionar vídeo -->
+                            @can('pode_registrar_video')
                             <div class="mb-4">
                                 <a href="{{ route('videos.create', $modulos->id) }}" class="btn btn-gradient-primary">Adicionar Vídeo</a>
                             </div>
+                            @endcan
 
                             <!-- Exibir os vídeos relacionados -->
                             <h4 class="card-title mt-4">Vídeos Relacionados</h4>
@@ -43,7 +45,7 @@
                                             <th>Descrição</th>
                                             <th>Link</th>
                                             <th>Imagem</th>
-                                            <th>Ações</th>
+                                            @can('pode_visualizar_video')<th>Ações</th>@endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,13 +63,13 @@
                                                 </td>
                                                 <td>
                                                     <!-- Botão Editar -->
-                                                    <a href="{{ route('videos.edit', $video->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                                    @can('pode_editar_video')<a href="{{ route('videos.edit', $video->id) }}" class="btn btn-warning btn-sm">Editar</a>@endcan
 
                                                     <!-- Botão Deletar -->
                                                     <form action="{{ route('videos.destroy', $video->id) }}" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este vídeo?');">Deletar</button>
+                                                        @can('pode_eliminar_video')<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este vídeo?');">Deletar</button>@endcan
                                                     </form>
                                                 </td>
                                             </tr>

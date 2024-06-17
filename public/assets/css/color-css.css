@@ -1,0 +1,15 @@
+.bg-dark-my {
+    background-color: #03111d !important;
+}
+
+.bg-dark-my * {
+    color: rgb(202, 202, 202) !important;
+}
+
+/* .bg-dark-my li:hover * {
+    color: rgb(7, 7, 7) !important;
+} */
+
+.font-12 {
+    font-size: 12px !important;
+}

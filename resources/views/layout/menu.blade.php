@@ -1,26 +1,11 @@
 
-<style>
-.bg-dark-my {
-    background-color: #000 !important;
-}
-
-.bg-dark-my * {
-    color: rgb(202, 202, 202) !important;
-}
-
-.bg-dark-my li:hover * {
-    color: rgb(7, 7, 7) !important;
-}
-
-</style>
-
-<br><br><br><br><br>
+<!-- br><br><br><br><br -->
       <!-- partial -->
       <!-- Menu -->
-      <div class="container-fluid page-body-wrapper">
+      <div class="container-fluid page-body-wrapper" style="margin-top: 50px;">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas bg-dark-my" id="sidebar">
-          <ul class="nav">
+          <ul class="nav pt-3">
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">

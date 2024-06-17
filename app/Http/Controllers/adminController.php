@@ -177,7 +177,7 @@ class adminController extends Controller
 
 
     public function roles_users(){
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $roles = Role::all();
         $users = User::all();
@@ -189,7 +189,7 @@ class adminController extends Controller
         ->get();
 
         // return $roles_users;
-        return view('admin.app_roles_users', compact('roles','roles_users','users','user'));
+        return view('admin.app_roles_users', compact('roles','roles_users','users','usuario'));
 
     }
     public function permissions_roles(){

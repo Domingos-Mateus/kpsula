@@ -1,6 +1,6 @@
-     <!-- partial:partials/_navbar.html -->
-     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+<!-- partial:partials/_navbar.html -->
+     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row bg-dark-my mode-change">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start bg-dark-my mode-change">
           <a class="navbar-brand brand-logo" href="/dashboard">
             <img src="/assets/logo/logo1.png" alt="logo" style="width: 35px; height: 35px;"/>
             </a>
@@ -20,7 +20,7 @@
               </div>
             </form>
           </div>
-          <ul class="navbar-nav navbar-nav-right">
+          <ul class="navbar-nav navbar-nav-right mode-change bg-dark-my">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
@@ -52,9 +52,11 @@
                 </a>
               </div>
             </li>
-            <li class="nav-item d-none d-lg-block full-screen-link">
-              <a class="nav-link">
-                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+            <li class="nav-item d-none d-lg-block full-screen-link" style="cursor: pointer;">
+              <a class="nav-link mode">
+                <!-- alterne mode view -->
+                <i class="fa fa-moon-o lua"></i>
+                <i class="fa fa-adjust sol font-12"></i>
               </a>
             </li>
             <li class="nav-item dropdown">
@@ -161,3 +163,34 @@
           </button>
         </div>
       </nav>
+
+    <script>
+        var mode = 1
+
+        document.querySelector('.mode').addEventListener('click', function() {
+            if(mode == 1) {
+                const elementoFilho1 = this.querySelector('.sol'); // Substitua 'classe-do-elemento-filho' pela classe ou seletor específico do elemento filho que deseja mostrar
+                elementoFilho1.classList.remove('font-12')
+
+                const elementoFilho2 = this.querySelector('.lua'); // Substitua 'classe-do-elemento-filho' pela classe ou seletor específico do elemento filho que deseja mostrar
+                elementoFilho2.classList.add('font-12')
+                mode = 2
+
+                document.querySelectorAll(".mode-change").forEach(el => {
+                    el.classList.remove("bg-dark-my");
+                });
+
+            } else {
+                const elementoFilho2 = this.querySelector('.lua'); // Substitua 'classe-do-elemento-filho' pela classe ou seletor específico do elemento filho que deseja mostrar
+                elementoFilho2.classList.remove('font-12')
+                mode = 1
+
+                const elementoFilho1 = this.querySelector('.sol'); // Substitua 'classe-do-elemento-filho' pela classe ou seletor específico do elemento filho que deseja mostrar
+                elementoFilho1.classList.add('font-12')
+
+                document.querySelectorAll(".mode-change").forEach(el => {
+                    el.classList.add("bg-dark-my");
+                });
+            }
+        });
+    </script>

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Modulos extends Model
 {
     use HasFactory;
+
+    // Relação hasMany com Videos
+    public function videos()
+    {
+        return $this->hasMany(Videos::class, 'modulo_id');
+    }
 }

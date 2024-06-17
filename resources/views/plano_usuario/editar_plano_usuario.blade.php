@@ -8,78 +8,75 @@
       <!-- Menu -->
         <!-- partial:partials/_sidebar.html -->
 
-
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Adicionar um Plano </h3>
+              <h3 class="page-title"> Vincular um plano ao usuário </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/planos/listar_planos">Voltar</a></li>
+                  <li class="breadcrumb-item"><a href="/plano_usuario/listar_plano_usuario">Cancelar</a></li>
                 </ol>
               </nav>
             </div>
 
-            <form action="/atualizar_plano/{{$planos->id}}" method="POST" enctype="multipart/form-data">
+            <!-- Formulário de Adição de Plano -->
+            <form action="/atualizar_plano_usuario/{{ $plano_user->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 @method('PUT')
 
-              <div class="col-12 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Detalhe</h4>
-                    <form class="form-sample">
-                      <p class="card-description"> Detalhe do Plano </p>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nome do Plano</label>
-                            <div class="col-sm-9">
-                                <label class="col-sm-3 col-form-label">{{$planos->nome_plano}}</label>
+                <div class="row">
+                  <div class="col-12 grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Formulário de Adição de Plano</h4>
+
+                        <p class="card-description"> Informações Pessoais </p>
+
+                        <!-- Nome do Plano -->
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="exampleFormControlSelect2">Seleciona um Plano</label>
+                                <select name="plano_id" class="form-select" id="exampleFormControlSelect2">
+                                    @foreach ($planos as $plano)
+                                  <option value="{{$plano->id}}" @if($plano_user->plano_id == $plano->id) selected @endif>{{$plano->nome_plano}}</option>
+                                  @endforeach
+                                </select>
+                            </div>
+                          </div>
+
+                          <!-- Preço -->
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="exampleFormControlSelect2">Seleciona um Usuário</label>
+                                <select name="user_id" class="form-select" id="exampleFormControlSelect2" disabled>
+                                    @foreach ($usuarios as $usuario)
+                                  <option value="{{$usuario->id}}" @if($plano_user->user_id == $usuario->id) selected @endif>{{$usuario->name}}</option>
+                                  @endforeach
+                                </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Preço</label>
-                            <div class="col-sm-9">
-                                <label class="col-sm-3 col-form-label">{{$planos->preco}}</label>
-                            </div>
+
+                        <!-- Dias -->
+
+
+                        <!-- Botões -->
+                        <div class="row">
+                          <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-gradient-primary me-2">Atualizar</button>
+                            <a href="/plano_usuario/listar_plano_usuario" class="btn btn-light">Cancelar</a>
                           </div>
                         </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Dias: </label>
-                            <div class="col-sm-9">
-                                <label class="col-sm-3 col-form-label">{{$planos->dias}}</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Descrição</label>
-                            <div class="col-sm-9">
-                            <label class="col-sm-3 col-form-label">{{$planos->descricao}}</label>
-                            </div>
-                          </div>
-                        </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
 
                       </div>
-              </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
-            </div>
-
+            </form>
           </div>
           <!-- content-wrapper ends -->
+
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -94,13 +91,16 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
+
     <!-- plugins:js -->
     <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
+
     <!-- Plugin js for this page -->
     <script src="../../assets/vendors/select2/select2.min.js"></script>
     <script src="../../assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
     <!-- End plugin js for this page -->
+
     <!-- inject:js -->
     <script src="../../assets/js/off-canvas.js"></script>
     <script src="../../assets/js/misc.js"></script>
@@ -108,9 +108,11 @@
     <script src="../../assets/js/todolist.js"></script>
     <script src="../../assets/js/jquery.cookie.js"></script>
     <!-- endinject -->
+
     <!-- Custom js for this page -->
     <script src="../../assets/js/file-upload.js"></script>
     <script src="../../assets/js/typeahead.js"></script>
     <script src="../../assets/js/select2.js"></script>
     <!-- End custom js for this page -->
-    @endsection
+
+@endsection

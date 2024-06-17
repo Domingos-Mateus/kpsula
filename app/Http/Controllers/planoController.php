@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Planos;
 use Illuminate\Http\Request;
 use Alert;
+use Illuminate\Support\Facades\Auth;
 
 class planoController extends Controller
 {
@@ -15,7 +16,9 @@ class planoController extends Controller
     {
         //
         $planos = Planos::all();
-        return view('planos/listar_planos', compact('planos'));
+        $usuario = Auth::user();
+
+        return view('planos/listar_planos', compact('planos','usuario'));
 
     }
 
@@ -25,7 +28,8 @@ class planoController extends Controller
     public function create()
     {
         //
-        return view('planos/registar_plano');
+        $usuario = Auth::user();
+        return view('planos/registar_plano','usuario');
     }
 
     /**
@@ -52,7 +56,8 @@ class planoController extends Controller
     {
         //
         $planos = Planos::find($id);
-        return view('planos/visualizar_plano', compact('planos'));
+        $usuario = Auth::user();
+        return view('planos/visualizar_plano', compact('planos','usuario'));
     }
 
     /**
@@ -62,7 +67,8 @@ class planoController extends Controller
     {
         //
         $planos = Planos::find($id);
-        return view('planos/editar_plano', compact('planos'));
+        $usuario = Auth::user();
+        return view('planos/editar_plano', compact('planos','usuario'));
     }
 
     /**
@@ -91,6 +97,6 @@ class planoController extends Controller
         //
         Planos::destroy($id);
         Alert::error('Eliminado', 'Plano Eliminado com sucesso');
-        return redirect('/planos/listar_planos');
+        return redirect('planos/listar_planos');
     }
 }

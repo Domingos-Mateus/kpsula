@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class usuarioController extends Controller
 {
@@ -14,7 +16,8 @@ class usuarioController extends Controller
     {
         //
         $usuarios = User::all();
-        return view('usuarios/listar_usuarios', compact('usuarios'));
+        $usuario = Auth::user();
+        return view('usuarios/listar_usuarios', compact('usuarios','usuario'));
     }
 
     /**
@@ -55,6 +58,18 @@ class usuarioController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $user = User::findOrFail($id);
+
+    // Alterar o status do usuário
+    $user->status = !$user->status; // Alterna entre ativo e inativo
+    $user->save();
+
+    // Alterar a senha do usuário
+    $newPassword = 'nova_senha'; // Defina a nova senha aqui
+    $user->password = Hash::make($newPassword);
+    $user->save();
+
+    return redirect()->back()->with('success', 'Status e senha do usuário atualizados com sucesso');
     }
 
     /**

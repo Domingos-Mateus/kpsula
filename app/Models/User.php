@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'roles_users');
     }
+
+    public function planos()
+{
+    return $this->belongsToMany(Planos::class, 'planos_users', 'user_id', 'plano_id');
+}
 }

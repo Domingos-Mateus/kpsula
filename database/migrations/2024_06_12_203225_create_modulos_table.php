@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('nome_modulo');
             $table->string('descricao')->nullable();
+            $table->string('foto_modulo')->nullable();
             $table->timestamps();
         });
     }

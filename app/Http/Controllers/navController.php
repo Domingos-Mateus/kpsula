@@ -2,31 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Modulos;
-use App\Models\Planos;
 use App\Models\User;
-use App\Models\Videos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class dashboardController extends Controller
+class navController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-{
-    $usuario = Auth::user();
-    $planos = Planos::count();
-    $videos = Videos::count();
-    $usuarios = User::count();
-    $modulos = Modulos::count();
+    {
+        //
+        $usuario = User::all();
+    return view('layout.navbar', compact('usuario'));
 
-//return $planos;
-
-    return view('dashboard', compact('planos', 'videos', 'usuarios','modulos','usuario'));
-}
-
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -11,10 +11,10 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Vídeos </h3>
+              <h3 class="page-title"> Plano do Usuário </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/planos/registar_plano"><div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-plus">Adicionar Vídeo</a></i> </div>
+                  <li class="breadcrumb-item"><a href="/plano_usuario/registar_plano_usuario"><div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-plus">Adicionar um plano para Usuario</a></i> </div>
                     </li>
                 </ol>
               </nav>
@@ -31,27 +31,28 @@
                         <tr>
                           <th> # </th>
                           <th> Nome do Plano </th>
+                          <th> Nome do Usuário </th>
                           <th> Preço </th>
-                          <th> Dias </th>
-                          <th> Descrição </th>
+                          <th> Data de validade </th>
                           <th> Opções </th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($planos as $plano)
+                        @foreach ($plano_usuarios as $plano_usuario)
 
                         <tr>
-                          <td> {{$plano->id}} </td>
-                          <td> {{$plano->nome_plano}} </td>
-                          <td> {{$plano->preco}} </td>
-                          <td> {{$plano->dias}} </td>
-                          <td> {{$plano->descricao}} </td>
+                          <td> {{$plano_usuario->id}} </td>
+                          <td> {{$plano_usuario->nome_plano}} </td>
+                          <td> {{$plano_usuario->name}} </td>
+                          <td> {{$plano_usuario->preco}} </td>
+                          <td> {{$plano_usuario->data_expiracao}} </td>
+
                           <td>
 
                             <div class="col-sm-6 col-md-4 col-lg-3">
-                            <a class="bg-primary p-2 rounded-circle" href="/planos/editar_plano/{{ $plano->id }}"><i style="font-size: 18px; color:black" class="fa fa-pencil"></i></a>
-                            <a class="bg-warning mx-2 p-2 rounded-circle" href="/planos/visualizar_plano/{{ $plano->id }}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
-                            <a class="bg-danger p-2 rounded-circle" href="/eliminar_plano/{{ $plano->id }}"><i style="font-size: 18px; color:black" class="fa fa-trash-o"></i></a>
+                            <a class="bg-primary p-2 rounded-circle" href="/plano_usuario/editar_plano_usuario/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-pencil"></i></a>
+                            <a class="bg-warning mx-2 p-2 rounded-circle" href="/planos/visualizar_plano/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
+                            <a class="bg-danger p-2 rounded-circle" href="/eliminar_plano_usuario/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-trash-o"></i></a>
 
                             </div>
                           </div>

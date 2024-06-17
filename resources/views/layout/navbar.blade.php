@@ -1,8 +1,10 @@
      <!-- partial:partials/_navbar.html -->
      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-          <a class="navbar-brand brand-logo" href="/dashboard"><img src="/assets/logo/logo.jpeg" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="#"><img src="/assets/logo/logo.jpeg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="/dashboard">
+            <img src="/assets/logo/logo1.png" alt="logo" style="width: 35px; height: 35px;"/>
+            </a>
+          <!-- a class="navbar-brand brand-logo-mini" href="#"><img src="/assets/logo/logo.png" alt="logo" /></!-->
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -26,7 +28,7 @@
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">Domingos Mateus</p>
+                  <p class="mb-1 text-black">{{$usuario->name}}</p>
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">

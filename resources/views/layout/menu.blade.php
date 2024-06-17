@@ -1,11 +1,25 @@
 
+<style>
+.bg-dark-my {
+    background-color: #000 !important;
+}
+
+.bg-dark-my * {
+    color: rgb(202, 202, 202) !important;
+}
+
+.bg-dark-my li:hover * {
+    color: rgb(7, 7, 7) !important;
+}
+
+</style>
 
 <br><br><br><br><br>
       <!-- partial -->
       <!-- Menu -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <nav class="sidebar sidebar-offcanvas bg-dark-my" id="sidebar">
           <ul class="nav">
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
@@ -17,8 +31,8 @@
 
 
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">Domingos Mateus</span>
-                  <span class="text-secondary text-small">Adminiistrador</span>
+                  <span class="font-weight-bold mb-2">{{$usuario->name}}</span>
+                  <span class="text-secondary text-small">{{$usuario->status}}</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
@@ -29,11 +43,13 @@
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
+
+            @can('pode_visualizar_usuario')
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Usuários</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                <i class="fa fa-user-circle-o"></i>
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
@@ -49,6 +65,7 @@
                 </ul>
               </div>
             </li>
+            @endcan
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
                 <span class="menu-title">Vídeos</span>
@@ -59,12 +76,17 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/modulos/listar_modulos">Módulos</a>
                   </li>
+
+                  <!--
                   <li class="nav-item">
                     <a class="nav-link" href="/videos/listar_videos">Vídeos</a>
                   </li>
+                  -->
                 </ul>
               </div>
             </li>
+
+            @can('pode_visualizar_permissao')
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <span class="menu-title">Permissões</span>
@@ -81,6 +103,7 @@
                 </ul>
               </div>
             </li>
+            @endcan
             @can('pode_visualizar_plano')
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
@@ -94,7 +117,7 @@
                   </li>
                   @can('pode_registrar_plano')
                   <li class="nav-item">
-                    <a class="nav-link" href="/planos/listar_planos">Registar Plano</a>
+                    <a class="nav-link" href="/plano_usuario/listar_plano_usuario">Plano dos Usuários</a>
                   </li>
                   @endcan
                 </ul>

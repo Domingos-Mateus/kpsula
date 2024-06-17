@@ -82,21 +82,28 @@
         <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_aluno", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_aluno"></td>
         <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_aluno", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_aluno"></td>
     </tr>
-
     <tr>
-        <th scope="row">Classes</th>
-        <td><input class="form-check-input" type="checkbox" id="visualizacao" name="visualizacao[]" {{ in_array("pode_visualizar_classe", old('visualizacao', $selected)) ? 'checked' : '' }} value="pode_visualizar_classe"></td>
-        <td><input class="form-check-input" type="checkbox" id="inclusao" name="inclusao[]" {{ in_array("pode_registrar_classe", old('inclusao', $selected)) ? 'checked' : '' }} value="pode_registrar_classe"></td>
-        <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_classe", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_classe"></td>
-        <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_classe", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_classe"></td>
+        <th scope="row">Planos do Usuario</th>
+        <td><input class="form-check-input" type="checkbox" id="visualizacao" name="visualizacao[]" {{ in_array("pode_visualizar_plano_usuario", old('visualizacao', $selected)) ? 'checked' : '' }} value="pode_visualizar_plano_usuario"></td>
+        <td><input class="form-check-input" type="checkbox" id="inclusao" name="inclusao[]" {{ in_array("pode_registrar_plano_usuario", old('inclusao', $selected)) ? 'checked' : '' }} value="pode_registrar_plano_usuario"></td>
+        <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_plano_usuario", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_plano_usuario"></td>
+        <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_plano_usuario", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_plano_usuario"></td>
     </tr>
 
     <tr>
-        <th scope="row">Consultas</th>
-        <td><input class="form-check-input" type="checkbox" id="visualizacao" name="visualizacao[]" {{ in_array("pode_visualizar_consulta", old('visualizacao', $selected)) ? 'checked' : '' }} value="pode_visualizar_consulta"></td>
-        <td><input class="form-check-input" type="checkbox" id="inclusao" name="inclusao[]" {{ in_array("pode_registrar_consulta", old('inclusao', $selected)) ? 'checked' : '' }} value="pode_registrar_consulta"></td>
-        <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_consulta", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_consulta"></td>
-        <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_consulta", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_consulta"></td>
+        <th scope="row">Modulos</th>
+        <td><input class="form-check-input" type="checkbox" id="visualizacao" name="visualizacao[]" {{ in_array("pode_visualizar_modulo", old('visualizacao', $selected)) ? 'checked' : '' }} value="pode_visualizar_modulo"></td>
+        <td><input class="form-check-input" type="checkbox" id="inclusao" name="inclusao[]" {{ in_array("pode_registrar_modulo", old('inclusao', $selected)) ? 'checked' : '' }} value="pode_registrar_modulo"></td>
+        <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_modulo", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_modulo"></td>
+        <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_modulo", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_modulo"></td>
+    </tr>
+
+    <tr>
+        <th scope="row">Videos</th>
+        <td><input class="form-check-input" type="checkbox" id="visualizacao" name="visualizacao[]" {{ in_array("pode_visualizar_video", old('visualizacao', $selected)) ? 'checked' : '' }} value="pode_visualizar_video"></td>
+        <td><input class="form-check-input" type="checkbox" id="inclusao" name="inclusao[]" {{ in_array("pode_registrar_video", old('inclusao', $selected)) ? 'checked' : '' }} value="pode_registrar_video"></td>
+        <td><input class="form-check-input" type="checkbox" id="edicao" name="edicao[]" {{ in_array("pode_editar_video", old('edicao', $selected)) ? 'checked' : '' }} value="pode_editar_video"></td>
+        <td><input class="form-check-input" type="checkbox" id="exclusao" name="exclusao[]" {{ in_array("pode_eliminar_video", old('exclusao', $selected)) ? 'checked' : '' }} value="pode_eliminar_video"></td>
     </tr>
 
 

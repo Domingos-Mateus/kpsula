@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('planos_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link_video');
-            $table->string('imagem')->nullable();
-            $table->string('nome_video');
-            $table->string('modulo_id')->nullable();
-            $table->string('descricao')->nullable();
+            $table->integer('plano_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->datetime('data_expiracao');
             $table->timestamps();
+
+            $table->foreign('plano_id')->references('id')->on('planos');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('planos_users');
     }
 };

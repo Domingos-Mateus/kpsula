@@ -43,34 +43,34 @@ class adminController extends Controller
 
      public function permissoes()
     {
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $permissoes = Permission::all();
 
         // return $permissoes;
-        return view('permission.app_permissions', compact('user', 'permissoes'));
+        return view('permission.app_permissions', compact('usuario', 'permissoes'));
     }
 
     public function meu_perfil(){
 
-        $user = Auth::user();
+        $usuario = Auth::user();
 
-        return view('permission.app_meu_perfil', compact('user'));
+        return view('permission.app_meu_perfil', compact('usuario'));
 
     }
 
     public function aceitar_termos()
     {
-        $user = Auth::user();
+        $usuario = Auth::user();
 
-        return view('conteudos.termos.app_aceitar_termos', compact('user'));
+        return view('conteudos.termos.app_aceitar_termos', compact('usuario'));
     }
 
     public function visualizar_termos()
     {
-        $user = Auth::user();
+        $usuario = Auth::user();
 
-        return view('conteudos.termos.app_visualizar_termos', compact('user'));
+        return view('conteudos.termos.app_visualizar_termos', compact('usuario'));
     }
 
     public function resposta_aceitar_termos($resposta){
@@ -85,21 +85,21 @@ class adminController extends Controller
 
     public function actualizar_perfil(Request $request){
 
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255']
         ]);
 
-        $usuario = User::find($user->id);
+        $usuario = User::find($usuario->id);
         $usuario->name = $request->name;
         $usuario->email = $request->email;
 
         $usuario->save();
 
 
-        $aluno = Alunos::where('usuario_id', $user->id)->first();
+        $aluno = Alunos::where('usuario_id', $usuario->id)->first();
         $aluno->nome = $request->name;
         $aluno->email = $request->email;
 
@@ -132,11 +132,11 @@ class adminController extends Controller
 
     public function dashboard()
     {
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $total_usuarios = User::all()->count();
 
-        return view('dashboard', compact('user'));
+        return view('dashboard', compact('usuario'));
 
     }
 
@@ -144,16 +144,16 @@ class adminController extends Controller
     {
         $tipo_apostila = $request->tipo_apostila;
 
-        $user = Auth::user();
+        $usuario = Auth::user();
 
-        $aluno = Alunos::where('usuario_id', $user->id)->first();
+        $aluno = Alunos::where('usuario_id', $usuario->id)->first();
 
-        return view('conteudos.apostilas.app_baixar_apostila', compact('user','aluno','tipo_apostila'));
+        return view('conteudos.apostilas.app_baixar_apostila', compact('usuario','aluno','tipo_apostila'));
     }
 
     public function enviar_email(){
 
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $testMailData = [
             'title' => 'Test Email From AllPHPTricks.com',
@@ -193,7 +193,7 @@ class adminController extends Controller
 
     }
     public function permissions_roles(){
-        $user = Auth::user();
+        $usuario = Auth::user();
 
 
         $role_id = 1;
@@ -211,12 +211,12 @@ class adminController extends Controller
             $selected[] = $option->name;
         }
 
-        return view('admin.app_permissions_roles', compact('user','permissions_roles', 'role_id', 'roles', 'selected'));
+        return view('admin.app_permissions_roles', compact('usuario','permissions_roles', 'role_id', 'roles', 'selected'));
     }
 
     public function permissions_roles_by_id($id){
 
-        $user = Auth::user();
+        $usuario = Auth::user();
 
         $role_id = $id;
         $roles = Role::all();
@@ -233,7 +233,7 @@ class adminController extends Controller
             $selected[] = $option->name;
         }
 
-        return view('admin.app_permissions_roles', compact('user','permissions_roles', 'role_id', 'roles', 'selected'));
+        return view('admin.app_permissions_roles', compact('usuario','permissions_roles', 'role_id', 'roles', 'selected'));
     }
 
 

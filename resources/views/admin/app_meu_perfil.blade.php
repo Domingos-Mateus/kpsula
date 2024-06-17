@@ -13,8 +13,6 @@
   @endif
 </center>
 
-
-
         <!-- Hero -->
         <div class="bg-image" style="background-image: url('assets/media/photos/photo17@2x.jpg');">
           <div class="bg-black-75">

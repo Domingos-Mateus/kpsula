@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\menuController;
 use App\Http\Controllers\ModulosController;
+use App\Http\Controllers\navController;
 use App\Http\Controllers\planoController;
+use App\Http\Controllers\planoUserController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\videoController;
 use Illuminate\Support\Facades\Route;
@@ -22,18 +25,42 @@ use Illuminate\Support\Facades\Route;
 Route::get('/usuarios/listar_usuarios', [usuarioController::class,'index']);
 
 Route::get('/dashboard', [dashboardController::class,'index']);
+Route::get('/layout/menu', [menuController::class,'index']);
+Route::get('/layout/navbar', [navController::class,'index']);
 
 
 //===================Rota Para Vídos=======================
 Route::get('/videos/listar_videos', [videoController::class,'index']);
 Route::get('/videos/registar_video', [videoController::class,'create']);
-Route::post('/salvar_video', [videoController::class,'store']);
+//Route::post('/salvar_video', [videoController::class,'store']);
+Route::post('/videos/store', [VideoController::class, 'store'])->name('videos.store');
+
+// Rota para exibir o formulário de edição de um vídeo
+Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+
+// Rota para atualizar os dados de um vídeo
+Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
+
+// Rota para excluir um vídeo
+Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy');
+
 Route::get('/videos/visualizar_video/{id}', [videoController::class,'show']);
-Route::get('/videos/editar_video/{id}', [videoController::class,'edit']);
-Route::put('/update_video/{id}', [videoController::class,'update']);
-Route::get('/eliminar_video/{id}', [videoController::class,'destroy']);
+//Route::get('/videos/editar_video/{id}', [videoController::class,'edit']);
+//Route::put('/update_video/{id}', [videoController::class,'update']);
+//Route::get('/eliminar_video/{id}', [videoController::class,'destroy']);
+
+Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->name('videos.create');
 
 //==================Rota para Planos=====================
+Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index']);
+Route::post('/salvar_plano_usuario', [planoUserController::class,'store']);
+Route::get('/plano_usuario/registar_plano_usuario', [planoUserController::class,'create']);
+Route::get('/plano_usuario/editar_plano_usuario/{id}', [planoUserController::class,'edit']);
+Route::get('/plano_usuario/visualizar_plano_usuario/{id}', [planoUserController::class,'show']);
+Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class,'update']);
+Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class,'destroy']);
+
+//==================Rota para Planos do Usuário=====================
 Route::get('/planos/listar_planos', [planoController::class,'index']);
 Route::post('/salvar_plano', [planoController::class,'store']);
 Route::get('/planos/registar_plano', [planoController::class,'create']);
@@ -43,14 +70,17 @@ Route::put('/atualizar_plano/{id}', [planoController::class,'update']);
 Route::get('/eliminar_plano/{id}', [planoController::class,'destroy']);
 
 
-//==================Rota para Planos=====================
-Route::get('/modulos/listar_modulos', [ModulosController::class,'index']);
+//==================Rota para Modulos=====================
+Route::get('/modulos/listar_modulos', [ModulosController::class, 'index'])->name('modulos.index');
+//Route::get('/modulos/listar_modulos', [ModulosController::class,'index']);
 Route::post('/salvar_modulo', [ModulosController::class,'store']);
 Route::get('/modulos/registar_modulo', [ModulosController::class,'create']);
 Route::get('/modulos/editar_modulo/{id}', [ModulosController::class,'edit']);
 Route::get('/modulos/visualizar_modulo/{id}', [ModulosController::class,'show']);
 Route::put('/atualizar_modulo/{id}', [ModulosController::class,'update']);
 Route::get('/eliminar_modulo/{id}', [ModulosController::class,'destroy']);
+
+Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.show');
 
 //==================Rota para Permissões=====================
 //Route::get('/permission/app_permissions', [adminController::class,'permissoes']);

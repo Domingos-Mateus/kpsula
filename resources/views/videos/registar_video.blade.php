@@ -41,52 +41,27 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Descrição do Vídeo</label>
+                                        <label class="col-sm-2 col-form-label">Descrição</label>
                                         <div class="col-sm-10">
                                             <textarea class="form-control" name="descricao" placeholder="Descrição do Vídeo" rows="3" required></textarea>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Seleção de Módulos -->
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Selecionar Módulos</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="modulos[]" value="0" id="modulo0">
-                                                <label class="form-check-label" for="modulo0">
-                                                    Módulo 0
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="modulos[]" value="1" id="modulo1" checked>
-                                                <label class="form-check-label" for="modulo1">
-                                                    Módulo 1
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="modulos[]" value="2" id="modulo2">
-                                                <label class="form-check-label" for="modulo2">
-                                                    Módulo 2
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="modulos[]" value="3" id="modulo3">
-                                                <label class="form-check-label" for="modulo3">
-                                                    Módulo 3
-                                                </label>
-                                            </div>
-                                            <!-- Adicione mais módulos conforme necessário -->
-                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect2">Seleciona um Módulo</label>
+                                            <select name="modulo_id" class="form-select" id="exampleFormControlSelect2">
+                                                @foreach ($modulos as $modulo)
+                                              <option value="{{$modulo->id}}">{{$modulo->nome_modulo}}</option>
+                                              @endforeach
+                                            </select>
+                                          </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Upload de Imagem -->
                             <div class="row">
                                 <div class="col-md-6">
@@ -117,8 +92,8 @@
         <!-- partial:../../partials/_footer.html -->
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. Todos os direitos reservados.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Feito à mão com <i class="mdi mdi-heart text-danger"></i></span>
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 <a href="www.devaholic.ao" target="_blank">DevAholic</a>. Todos os direitos reservados.</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Feito com <i class="mdi mdi-heart text-danger"></i></span>
             </div>
         </footer>
         <!-- partial -->

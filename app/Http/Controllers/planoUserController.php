@@ -48,6 +48,25 @@ class planoUserController extends Controller
     return view('plano_usuario/registar_plano_usuario', compact('planos', 'usuarios','usuario'));
 }
 
+   public function assinarPlano()
+{
+    $usuario = Auth::user();
+    $planos = Planos::all();
+
+    // Verifica se o usuário logado possui pelo menos um plano
+    if ($usuario->planos()->exists()) {
+        // Redireciona para outra página com uma mensagem se o usuário já possui um plano
+        $planoUsuario = $usuario->planos()->first();
+        //return "Ja tem um plano";
+        return view('plano_usuario/plano_individual_user', compact('planos', 'usuario','planoUsuario'));
+    }
+
+   // return view('plano_usuario/registar_plano_usuario', compact('planos', 'usuario'));
+    return view('plano_usuario/assinar_plano_usuario', compact('planos', 'usuario'));
+}
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -79,13 +98,42 @@ class planoUserController extends Controller
 
             // Salve o modelo PlanosUsers no banco de dados
             $plano_user->save();
-
-            // Exiba uma mensagem de sucesso
             Alert::success('Salvo', 'Plano salvo com sucesso');
-
-            // Redirecione para a lista de planos do usuário
             return redirect('plano_usuario/listar_plano_usuario');
         }
+
+
+
+    public function pagar(Request $request)
+{
+    $plano_user = new PlanosUsers;
+
+    $plano_user->plano_id = $request->plano_id;
+
+    $user_id = Auth::id();
+    $plano_user->user_id = $user_id;
+
+    // Obtenha o plano associado ao plano_id
+    $plano = Planos::find($request->plano_id);
+
+    // Verifique se o plano foi encontrado
+    if ($plano) {
+        // Calcule a data de expiração
+        $data_hoje = Carbon::now();
+        $data_expiracao = $data_hoje->copy()->addDays($plano->dias);
+
+        // Defina a data de expiração no modelo
+        $plano_user->data_expiracao = $data_expiracao;
+    } else {
+        // Plano não encontrado, pode lançar uma exceção ou tratar o erro de outra forma
+        Alert::error('Erro', 'Plano não encontrado');
+        return redirect()->back();
+    }
+
+    $plano_user->save();
+    Alert::success('Salvo', 'Plano salvo com sucesso');
+    return redirect('plano_usuario/plano_individual_user');
+}
 
 
     /**
@@ -100,6 +148,29 @@ class planoUserController extends Controller
         $usuario = Auth::user();
 
         return view('plano_usuario/editar_plano_usuario', compact('planos', 'usuarios','usuario'));
+    }
+
+    //Detalhar o plano que o aluno obteve
+    public function detalharPlano()
+    {
+        //
+        $usuario = Auth::user();
+        $planos = Planos::all();
+
+        // Verifica se o usuário logado possui pelo menos um plano
+        if ($usuario->planos()->exists()) {
+            // Redireciona para outra página com uma mensagem se o usuário já possui um plano
+            $planoUsuario = $usuario->planos()->first();
+            //return "Ja tem um plano";
+            return view('plano_usuario/plano_individual_user', compact('planos', 'usuario','planoUsuario'));
+        }
+        $planoUsuario = $usuario->planos()->first();
+
+        //return "Ainda não possui um plano";
+       // return view('plano_usuario/registar_plano_usuario', compact('planos', 'usuario'));
+       return view('plano_usuario/plano_individual_user', compact('planos', 'usuario','planoUsuario'));
+
+        //return view('plano_usuario/assinar_plano_usuario', compact('planos', 'usuario'));
     }
 
     /**

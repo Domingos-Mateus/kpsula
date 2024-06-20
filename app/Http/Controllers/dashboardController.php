@@ -15,22 +15,25 @@ class dashboardController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $usuario = Auth::user();
-    $planos = Planos::count();
-    $videos = Videos::count();
-    $usuarios = User::count();
-    $modulos = Modulos::count();
+    {
+        $user = Auth::user();
 
-//return $planos;
-
-    return view('dashboard', compact('planos', 'videos', 'usuarios','modulos','usuario'));
-}
+        if($user->status == 'aluno')
+            return redirect('aluno_index');
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
+        $usuario = Auth::user();
+        $planos = Planos::count();
+        $videos = Videos::count();
+        $usuarios = User::count();
+        $modulos = Modulos::count();
+
+    //return $planos;
+
+        return view('dashboard', compact('planos', 'videos', 'usuarios','modulos','usuario'));
+    }
+
+
     public function create()
     {
         //

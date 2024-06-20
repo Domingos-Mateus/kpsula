@@ -81,15 +81,15 @@ class videoController extends Controller
     public function show1()
     {
         //
-        $usuario = Auth::user();
 
-        return view('videos/visualizar_video');
 
     }
     public function show(string $id)
     {
         //
         $videos = Videos::find($id);
+        $usuario = Auth::user();
+
         return view('videos/visualizar_video', compact('videos','usuario'));
 
     }

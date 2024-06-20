@@ -100,6 +100,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/planos/listar_planos">Listar Planos</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/plano_usuario/plano_individual_user">Meu Plano</a>
+                  </li>
                   @can('pode_registrar_plano')
                   <li class="nav-item">
                     <a class="nav-link" href="/plano_usuario/listar_plano_usuario">Plano dos Usuários</a>
@@ -121,16 +124,16 @@
                     <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/login.html"> Login </a>
+                    <a class="nav-link" href="#"> Login </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/register.html"> Registro </a>
+                    <a class="nav-link" href="#"> Registro </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
+                    <a class="nav-link" href="#"> 404 </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
+                    <a class="nav-link" href="#"> 500 </a>
                   </li>
                 </ul>
               </div>

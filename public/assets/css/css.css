@@ -1,0 +1,113 @@
+
+body{
+   background-color: #333;
+}
+
+/*header*/
+
+#nav-container {
+   padding-top: 0;
+   padding-bottom: 0;
+}
+
+#logo {
+   width: 130px;
+   border-radius: 12px;
+}
+
+.navbar-brand {
+   padding: 0;
+   
+}
+
+#navbar-links a {
+   color: aliceblue;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+   padding: 1rem 0.8rem;
+   
+}
+#hr{
+   width: 1200px;
+   color: beige;
+}
+
+/*conteudo*/
+
+ .card{
+   text-align: center;
+   height: 350px;
+   width: 200px;
+   border-radius: 30px;
+   margin-right: 20px;
+   background-color: #333;
+   
+ }
+ .card-img-top{
+   text-align: center;
+   height: 450px;
+   width: 200px;
+   border-radius: 30px;
+}
+#cont{
+   margin-top: 300px;
+}
+.main-title{
+   color: aliceblue;
+   font-size: 30px;
+}
+
+#img1{
+   text-align: right;
+}
+
+.conteudos{
+   display: flex;
+   justify-content: center;
+}
+
+/*barra de pesquisa*/
+
+.form-inline {
+   width: 50%;
+   border: black 10px;
+}
+
+.input-group {
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   background-color: #333;
+}
+
+.input-group .form-control {
+   border-right: 0;
+   margin-top: 0;
+}
+
+.col-md-8{
+  margin-left: 400px;
+  margin-bottom: 10px;
+  
+} 
+
+/**/
+h2{
+   font-size: 20px;
+   color: aliceblue;
+   text-decoration:  none;
+}
+p{
+   font-size: 20px;
+   color:midnightblue;
+}
+h1{
+   text-transform: none;
+   text-decoration: none;
+   color: aliceblue;
+   list-style: none;
+}
+.container-fluid{
+   width:50% ;
+}
+
+/**/

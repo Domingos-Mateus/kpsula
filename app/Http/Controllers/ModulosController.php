@@ -35,6 +35,28 @@ class ModulosController extends Controller
 }
 
 
+    public function indexAluno(Request $request)
+{
+    $searchTerm = $request->input('search');
+    $usuario = Auth::user();
+
+
+    // Consultar os módulos com base no termo de pesquisa e ordenar por nome_modulo
+    $modulos = Modulos::query()
+        ->where('nome_modulo', 'LIKE', "%{$searchTerm}%")
+        ->orWhere('descricao', 'LIKE', "%{$searchTerm}%")
+        ->orderBy('nome_modulo')
+        ->paginate(20);
+
+    // Retornar JSON se for uma requisição AJAX
+    if ($request->ajax()) {
+        return response()->json($modulos);
+    }
+
+    return view('modulos/listar_modulo_aluno', compact('modulos','usuario'));
+}
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,7 +66,7 @@ class ModulosController extends Controller
         //
         $usuario = Auth::user();
 
-        return view('modulos/registar_modulo','usuario');
+        return view('modulos/registar_modulo',compact('usuario'));
     }
 
     /**
@@ -90,10 +112,25 @@ class ModulosController extends Controller
     $modulos = Modulos::findOrFail($id);
 
     // Buscar os vídeos relacionados com paginação de 20 por página
+    $primeiro_video = $modulos->videos()->first();
     $videos = $modulos->videos()->paginate(20);
+
+    //return $primeiro_video;
 
     // Passar o módulo e os vídeos para a view
     return view('modulos.visualizar_modulo', compact('modulos', 'videos','usuario'));
+}
+
+    public function showAluno($id)
+{
+    $usuario = Auth::user();
+    $modulos = Modulos::findOrFail($id);
+
+    // Buscar os vídeos relacionados com paginação de 20 por página
+    $videos = $modulos->videos()->paginate(20);
+
+    // Passar o módulo e os vídeos para a view
+    return view('modulos/visualizar_modulo_aluno', compact('modulos', 'videos','usuario'));
 }
 
     /**

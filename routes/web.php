@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\alunoIndexController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\menuController;
 use App\Http\Controllers\ModulosController;
@@ -22,76 +23,79 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //================Rota para Usuários==========
-Route::get('/usuarios/listar_usuarios', [usuarioController::class,'index']);
+Route::get('/usuarios/listar_usuarios', [usuarioController::class,'index'])->middleware('auth');
 
-Route::get('/dashboard', [dashboardController::class,'index']);
-Route::get('/layout/menu', [menuController::class,'index']);
-Route::get('/layout/navbar', [navController::class,'index']);
+Route::get('/dashboard', [dashboardController::class,'index'])->middleware('auth');
+Route::get('/aluno_index', [alunoIndexController::class,'index'])->middleware('auth');
+Route::get('/layout/menu', [menuController::class,'index'])->middleware('auth');
+Route::get('/layout/navbar', [navController::class,'index'])->middleware('auth');
 
 
 //===================Rota Para Vídos=======================
-Route::get('/videos/listar_videos', [videoController::class,'index']);
-Route::get('/videos/registar_video', [videoController::class,'create']);
-//Route::post('/salvar_video', [videoController::class,'store']);
-Route::post('/videos/store', [VideoController::class, 'store'])->name('videos.store');
+Route::get('/videos/listar_videos', [videoController::class,'index'])->middleware('auth');
+Route::get('/videos/registar_video', [videoController::class,'create'])->middleware('auth');
+//Route::post('/salvar_video', [videoController::class,'store'])->middleware('auth');
+Route::post('/videos/store', [VideoController::class, 'store'])->name('videos.store')->middleware('auth');
 
 // Rota para exibir o formulário de edição de um vídeo
-Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit')->middleware('auth');
 
 // Rota para atualizar os dados de um vídeo
-Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
+Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update')->middleware('auth');
 
 // Rota para excluir um vídeo
-Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy');
+Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
 
-Route::get('/videos/visualizar_video/{id}', [videoController::class,'show']);
-//Route::get('/videos/editar_video/{id}', [videoController::class,'edit']);
-//Route::put('/update_video/{id}', [videoController::class,'update']);
-//Route::get('/eliminar_video/{id}', [videoController::class,'destroy']);
+Route::get('/videos/visualizar_video/{id}', [videoController::class,'show'])->middleware('auth');
+//Route::get('/videos/editar_video/{id}', [videoController::class,'edit'])->middleware('auth');
+//Route::put('/update_video/{id}', [videoController::class,'update'])->middleware('auth');
+//Route::get('/eliminar_video/{id}', [videoController::class,'destroy'])->middleware('auth');
 
-Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->name('videos.create');
+Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->name('videos.create')->middleware('auth');
+
+//==================Rota para Planos para o usuário=====================
+Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index'])->middleware('auth');
+Route::post('/salvar_plano_usuario', [planoUserController::class,'store'])->middleware('auth');
+Route::post('/salvar_plano_usuario', [planoUserController::class,'pagar'])->middleware('auth');
+Route::get('/plano_usuario/registar_plano_usuario', [planoUserController::class,'create'])->middleware('auth');
+Route::get('/plano_usuario/assinar_plano_usuario', [planoUserController::class,'assinarPlano'])->middleware('auth');
+Route::get('/plano_usuario/editar_plano_usuario/{id}', [planoUserController::class,'edit'])->middleware('auth');
+Route::get('/plano_usuario/visualizar_plano_usuario/{id}', [planoUserController::class,'show'])->middleware('auth');
+Route::get('/plano_usuario/plano_individual_user', [planoUserController::class,'detalharPlano'])->middleware('auth');
+Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class,'update'])->middleware('auth');
+Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class,'destroy'])->middleware('auth');
 
 //==================Rota para Planos=====================
-Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index']);
-Route::post('/salvar_plano_usuario', [planoUserController::class,'store']);
-Route::get('/plano_usuario/registar_plano_usuario', [planoUserController::class,'create']);
-Route::get('/plano_usuario/editar_plano_usuario/{id}', [planoUserController::class,'edit']);
-Route::get('/plano_usuario/visualizar_plano_usuario/{id}', [planoUserController::class,'show']);
-Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class,'update']);
-Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class,'destroy']);
-
-//==================Rota para Planos do Usuário=====================
-Route::get('/planos/listar_planos', [planoController::class,'index']);
-Route::post('/salvar_plano', [planoController::class,'store']);
-Route::get('/planos/registar_plano', [planoController::class,'create']);
-Route::get('/planos/editar_plano/{id}', [planoController::class,'edit']);
-Route::get('/planos/visualizar_plano/{id}', [planoController::class,'show']);
-Route::put('/atualizar_plano/{id}', [planoController::class,'update']);
-Route::get('/eliminar_plano/{id}', [planoController::class,'destroy']);
+Route::get('/planos/listar_planos', [planoController::class,'index'])->middleware('auth');
+Route::post('/salvar_plano', [planoController::class,'store'])->middleware('auth');
+Route::get('/planos/registar_plano', [planoController::class,'create'])->middleware('auth');
+Route::get('/planos/editar_plano/{id}', [planoController::class,'edit'])->middleware('auth');
+Route::get('/planos/visualizar_plano/{id}', [planoController::class,'show'])->middleware('auth');
+Route::put('/atualizar_plano/{id}', [planoController::class,'update'])->middleware('auth');
+Route::get('/eliminar_plano/{id}', [planoController::class,'destroy'])->middleware('auth');
 
 
 //==================Rota para Modulos=====================
-Route::get('/modulos/listar_modulos', [ModulosController::class, 'index'])->name('modulos.index');
-//Route::get('/modulos/listar_modulos', [ModulosController::class,'index']);
-Route::post('/salvar_modulo', [ModulosController::class,'store']);
-Route::get('/modulos/registar_modulo', [ModulosController::class,'create']);
-Route::get('/modulos/editar_modulo/{id}', [ModulosController::class,'edit']);
-Route::get('/modulos/visualizar_modulo/{id}', [ModulosController::class,'show']);
-Route::put('/atualizar_modulo/{id}', [ModulosController::class,'update']);
-Route::get('/eliminar_modulo/{id}', [ModulosController::class,'destroy']);
+Route::get('/modulos/listar_modulos', [ModulosController::class, 'index'])->name('modulos.index')->middleware('auth');
+Route::get('/modulos/listar_modulo_aluno', [ModulosController::class, 'indexAluno'])->name('modulos.indexAluno')->middleware('auth');
+Route::post('/salvar_modulo', [ModulosController::class,'store'])->middleware('auth');
+Route::get('/modulos/registar_modulo', [ModulosController::class,'create'])->middleware('auth');
+Route::get('/modulos/editar_modulo/{id}', [ModulosController::class,'edit'])->middleware('auth');
+Route::get('/modulos/visualizar_modulo/{id}', [ModulosController::class,'show'])->middleware('auth');
+Route::get('/modulos/visualizar_modulo_aluno/{id}', [ModulosController::class,'showAluno'])->middleware('auth');
+Route::put('/atualizar_modulo/{id}', [ModulosController::class,'update'])->middleware('auth');
+Route::get('/eliminar_modulo/{id}', [ModulosController::class,'destroy'])->middleware('auth');
 
-Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.show');
+Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.show')->middleware('auth');
 
 //==================Rota para Permissões=====================
-//Route::get('/permission/app_permissions', [adminController::class,'permissoes']);
 
-Route::get('/roles_users','App\Http\Controllers\adminController@roles_users') ->name('roles');
-Route::get('/permissions_roles','App\Http\Controllers\adminController@permissions_roles')->name('permissions');
+Route::get('/roles_users','App\Http\Controllers\adminController@roles_users') ->name('roles')->middleware('auth');
+Route::get('/permissions_roles','App\Http\Controllers\adminController@permissions_roles')->name('permissions')->middleware('auth');
 Route::get('/permissions_roles_by_id/{id}','App\Http\Controllers\adminController@permissions_roles_by_id')->middleware('auth');
 Route::post('/salvar_roles_users','App\Http\Controllers\adminController@salvar_roles_users')->middleware('auth');
 Route::post('/actualizar_roles_users','App\Http\Controllers\adminController@actualizar_roles_users')->middleware('auth');
 Route::post('/salvar_permissions_roles','App\Http\Controllers\adminController@salvar_permissions_roles')->middleware('auth');
-//Route::get('/login', 'App\Http\Controllers\adminController@login')->middleware('auth');
 Route::post('/criar_token_acesso', 'App\Http\Controllers\adminController@criar_token_acesso')->middleware('auth');
 
 
@@ -99,12 +103,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/usuarios.listar_usuarios', function () {
-    return view('usuarios/listar_usuarios');
-});
+    return view('usuarios/listar_usuarios')->middleware('auth');
+})->middleware('auth');
 /*
 Route::get('/', function () {
-    return view('index');
-});
+    return view('index')->middleware('auth');
+})->middleware('auth');
 */
 Route::middleware([
     'auth:sanctum',
@@ -114,12 +118,12 @@ Route::middleware([
 
 /*
     Route::get('/dashboard', function () {
-        return redirect('dashboard');
-    })->name('dashboard');
+        return redirect('dashboard')->middleware('auth');
+    })->name('dashboard')->middleware('auth');
 
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return view('dashboard')->middleware('auth');
+    })->name('dashboard')->middleware('auth');
 */
-});
+})->middleware('auth');

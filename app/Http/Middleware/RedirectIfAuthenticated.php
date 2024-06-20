@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -19,9 +20,17 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
+        $user = Auth::user();
+
+
+
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+
+                if($user->status == 'admin')
                 return redirect(RouteServiceProvider::HOME);
+                else
+                return redirect('aluno_index');
             }
         }
 

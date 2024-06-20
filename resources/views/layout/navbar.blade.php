@@ -36,7 +36,6 @@
                   <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-logout me-2 text-primary"></i>
 
                    <!-- Authentication -->
                    <form method="POST" action="{{ route('logout') }}">
@@ -52,16 +51,9 @@
                 </a>
               </div>
             </li>
-            <li class="nav-item d-none d-lg-block full-screen-link" style="cursor: pointer;">
-              <a class="nav-link mode">
-                <!-- alterne mode view -->
-                <i class="fa fa-moon-o lua"></i>
-                <i class="fa fa-adjust sol font-12"></i>
-              </a>
-            </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-email-outline"></i>
                 <span class="count-symbol bg-warning"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="messageDropdown">
@@ -111,7 +103,6 @@
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-success">
-                      <i class="mdi mdi-calendar"></i>
                     </div>
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
@@ -123,7 +114,6 @@
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-warning">
-                      <i class="mdi mdi-cog"></i>
                     </div>
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">

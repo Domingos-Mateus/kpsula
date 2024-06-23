@@ -31,11 +31,7 @@
                                         <p class="card-text">{{ $videos->first()->descricao }}</p>
                                         <a href="/videos/visualizar_video/{{$videos->first()->id}}" class="btn btn-primary">Ver Vídeo</a>
                                         <div class="mt-2">
-                                            @if($videos->first()->imagem)
-                                                <img src="{{ asset($videos->first()->imagem) }}" alt="Imagem do Vídeo" width="100%">
-                                            @else
-                                                N/A
-                                            @endif
+                                            {!!$primeiro_video->link_video!!}
                                         </div>
                                     </div>
                                 </div>

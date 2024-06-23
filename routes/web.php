@@ -37,7 +37,7 @@ Route::get('/videos/registar_video', [videoController::class,'create'])->middlew
 //Route::post('/salvar_video', [videoController::class,'store'])->middleware('auth');
 Route::post('/videos/store', [VideoController::class, 'store'])->name('videos.store')->middleware('auth');
 
-// Rota para exibir o formulário de edição de um vídeo
+Route::get('/videos/{id}', [videoController::class, 'show'])->name('alunos.videos.show')->middleware('auth');
 Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit')->middleware('auth');
 
 // Rota para atualizar os dados de um vídeo
@@ -77,16 +77,20 @@ Route::get('/eliminar_plano/{id}', [planoController::class,'destroy'])->middlewa
 
 //==================Rota para Modulos=====================
 Route::get('/modulos/listar_modulos', [ModulosController::class, 'index'])->name('modulos.index')->middleware('auth');
-Route::get('/modulos/listar_modulo_aluno', [ModulosController::class, 'indexAluno'])->name('modulos.indexAluno')->middleware('auth');
 Route::post('/salvar_modulo', [ModulosController::class,'store'])->middleware('auth');
 Route::get('/modulos/registar_modulo', [ModulosController::class,'create'])->middleware('auth');
 Route::get('/modulos/editar_modulo/{id}', [ModulosController::class,'edit'])->middleware('auth');
 Route::get('/modulos/visualizar_modulo/{id}', [ModulosController::class,'show'])->middleware('auth');
-Route::get('/modulos/visualizar_modulo_aluno/{id}', [ModulosController::class,'showAluno'])->middleware('auth');
 Route::put('/atualizar_modulo/{id}', [ModulosController::class,'update'])->middleware('auth');
 Route::get('/eliminar_modulo/{id}', [ModulosController::class,'destroy'])->middleware('auth');
 
 Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.show')->middleware('auth');
+
+//==================Rota para Alunos=====================
+Route::get('/alunos/modulos/listar_modulo_aluno', [ModulosController::class, 'indexAluno'])->name('modulos.indexAluno')->middleware('auth');
+Route::get('/alunos/modulos/visualizar_modulo_aluno1/{id}', [ModulosController::class,'showAluno'])->middleware('auth');
+Route::get('/videos/{id}', [videoController::class, 'show'])->name('videos.show')->middleware('auth');
+
 
 //==================Rota para Permissões=====================
 

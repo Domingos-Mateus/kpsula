@@ -84,15 +84,14 @@ class videoController extends Controller
 
 
     }
-    public function show(string $id)
-    {
-        //
-        $videos = Videos::find($id);
-        $usuario = Auth::user();
+    public function show($id)
+{
+    $video = Videos::findOrFail($id);
+    $modulo = $video->modulo; // Supondo que existe uma relação entre Video e Modulo
+    $usuario = Auth::user();
 
-        return view('videos/visualizar_video', compact('videos','usuario'));
-
-    }
+    return view('videos.visualizar_video', compact('video', 'modulo', 'usuario'));
+}
 
     /**
      * Show the form for editing the specified resource.

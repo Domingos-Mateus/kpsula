@@ -13,7 +13,7 @@
     <script src="/assets/capsula/bootstrap/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            padding-top: 150px; /* Espaço suficiente para navbar e banner fixos */
+            padding-top: 100px; /* Espaço suficiente para navbar */
         }
 
         .navbar {
@@ -25,18 +25,15 @@
         }
 
         .banner {
-            height: 250px; /* Banner mais curto */
+            height: 250px; /* Banner centralizado */
             background: url('/assets/capsula/img/v.jpg') no-repeat center center;
             background-size: cover;
             border-radius: 10px;
-            position: fixed;
-            width: 100%;
-            top: 56px; /* Espaço para a navbar */
-            z-index: 1020;
+            margin: 20px auto;
         }
 
         .container {
-            margin-top: 300px; /* Espaço suficiente para navbar e banner fixos */
+            margin-top: 20px; /* Espaço ajustado após o banner */
         }
 
         .card {
@@ -44,7 +41,8 @@
             background-color: #222;
             border: none;
             color: #fff;
-            border-radius: 20px;
+            border-radius: 10px;
+            height: 200px; /* Ajustando altura para ser retangular */
         }
 
         .card:hover {
@@ -70,38 +68,62 @@
         .dropdown-menu-dark .dropdown-item:hover {
             background-color: #444;
         }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .search-bar {
+            width: 200px;
+        }
+
+        .dropdown-item-text {
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/aluno_index" style="color: #fff;">KPSULA</a>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-bell"></i></a>
-                </li>
-                <li class="nav-item">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
-                    </form>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/assets/capsula/img/profile.jpg" class="profile-img" alt="Profile">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li><span class="dropdown-item-text">Nome do Usuário</span></li>
-                        <li><span class="dropdown-item-text">Status</span></li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <a class="navbar-brand me-auto" href="/aluno_index">KPSULA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2 search-bar" type="search" placeholder="Pesquisar" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="planDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Planos
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="planDropdown">
+                            <li><a class="dropdown-item" href="#">Planos</a></li>
+                            <li><a class="dropdown-item" href="#">Meu Plano</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/assets/capsula/img/profile.jpg" class="profile-img" alt="Profile">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><span class="dropdown-item-text">Nome do Usuário</span></li>
+                            <li><a class="dropdown-item" href="#">Ajuda</a></li>
+                            <li><a class="dropdown-item" href="#">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="banner"></div>
             </div>
@@ -113,7 +135,7 @@
                     <div class="col-12">
                         <h3 class="main-title">Meus Conteúdos</h3>
                     </div>
-                    <a href="/modulos/listar_modulo_aluno">
+                    <a href="/alunos/modulos/listar_modulo_aluno">
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img src="/assets/capsula/img/cap.jpg" class="card-img-top" alt="">

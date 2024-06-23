@@ -53,7 +53,7 @@ class ModulosController extends Controller
         return response()->json($modulos);
     }
 
-    return view('modulos/listar_modulo_aluno', compact('modulos','usuario'));
+    return view('alunos/modulos/listar_modulo_aluno', compact('modulos','usuario'));
 }
 
 
@@ -108,30 +108,24 @@ class ModulosController extends Controller
     public function show($id)
 {
     $usuario = Auth::user();
-
     $modulos = Modulos::findOrFail($id);
-
-    // Buscar os vídeos relacionados com paginação de 20 por página
     $primeiro_video = $modulos->videos()->first();
     $videos = $modulos->videos()->paginate(20);
 
-    //return $primeiro_video;
-
-    // Passar o módulo e os vídeos para a view
-    return view('modulos.visualizar_modulo', compact('modulos', 'videos','usuario'));
+    return view('modulos.visualizar_modulo', compact('modulos', 'videos', 'primeiro_video', 'usuario'));
 }
 
-    public function showAluno($id)
+public function showAluno($id)
 {
     $usuario = Auth::user();
     $modulos = Modulos::findOrFail($id);
-
-    // Buscar os vídeos relacionados com paginação de 20 por página
+    $primeiro_video = $modulos->videos()->first();
     $videos = $modulos->videos()->paginate(20);
 
-    // Passar o módulo e os vídeos para a view
-    return view('modulos/visualizar_modulo_aluno', compact('modulos', 'videos','usuario'));
+    return view('alunos/modulos/visualizar_modulo_aluno1', compact('modulos', 'videos', 'primeiro_video', 'usuario'));
 }
+
+
 
     /**
      * Show the form for editing the specified resource.

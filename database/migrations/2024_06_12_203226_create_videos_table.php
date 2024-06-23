@@ -15,6 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->text('link_video');
             $table->text('imagem')->nullable();
+            $table->boolean('avancar')->default(false); // Campo para controlar se o vídeo pode avançar
+            $table->boolean('recuar')->default(false);  // Campo para controlar se o vídeo pode recuar
+            $table->boolean('pausar')->default(true);
             $table->string('nome_video');
             $table->integer('modulo_id')->unsigned();
             $table->integer('plano_id')->unsigned();

@@ -125,7 +125,7 @@
                 </div>
                 <div class="conteudos">
                     @foreach ($modulos as $modulo)
-                    <a href="/modulos/visualizar_modulo_aluno/{{ $modulo->id }}">
+                    <a href="/alunos/modulos/visualizar_modulo_aluno/{{ $modulo->id }}">
                         <div class="col-md-3">
                             <div class="card">
                                 <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="">

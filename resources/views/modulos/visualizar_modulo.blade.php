@@ -32,7 +32,7 @@
                                         <a href="/videos/visualizar_video/{{$videos->first()->id}}" class="btn btn-primary">Ver Vídeo</a>
                                         <div class="mt-2">
                                             @if($videos->first()->imagem)
-                                                <img src="{{ asset($videos->first()->imagem) }}" alt="Imagem do Vídeo" width="100%">
+                                            {!! asset($primeiro_video->first()->link_video) !!}
                                             @else
                                                 N/A
                                             @endif
@@ -40,6 +40,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         @elseif($modulos->foto_modulo)
                             <div class="mb-4">
                                 <img src="{{ asset($modulos->foto_modulo) }}" alt="Imagem do Módulo" width="300">

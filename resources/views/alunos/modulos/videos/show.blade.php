@@ -124,7 +124,7 @@
             <ul class="modules-list">
                 @foreach($videos as $video)
                     <li>
-                        <a href="{{ route('videos.show', $video->id) }}">
+                        <a href="{{ route('alunos.videos.show', $video->id) }}">
                             {{ $video->nome_video }}
                         </a>
                     </li>

@@ -1,141 +1,103 @@
-@extends('layout.template')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Vídeo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-@section('conteudo')
-<br><br><br><br><br>
-<div class="main-panel">
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">Visualizar Módulo</h3>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/modulos/listar_modulos">Voltar</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Visualizar Módulo</li>
-                </ol>
-            </nav>
+    <br><br>
+    <div class="container-fluid">
+        <br><br><br><br>
+
+        <!-- Header -->
+        <div class="row bg-dark text-white p-2 align-items-center">
+            <div class="col">
+                <a href="/aluno_index" class="text-white"><i class="fas fa-arrow-left"></i> Voltar para o Portal</a>
+            </div>
+            <div class="col text-right">
+                <a href="{{ url('concluir/'.$primeiro_video->id) }}">
+                    <button class="btn btn-sm btn-outline-light mr-2">Marcar como concluída</button>
+                </a>
+                <button class="btn btn-sm btn-outline-light mr-2"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button class="btn btn-sm btn-outline-light mr-2">Próximo <i class="fas fa-chevron-right"></i></button>
+                <button class="btn btn-sm btn-outline-light mr-2">Anotação</button>
+                <a href="/alunos/modulos/listar_modulo_aluno"><button class="btn btn-sm btn-outline-light">Ver Módulos</button></a>
+            </div>
         </div>
 
+        <!-- Stars Rating -->
+        <div class="row bg-dark text-white p-2">
+            <div class="col text-center">
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+            </div>
+        </div>
+
+        <!-- Main Content -->
         <div class="row">
-            <div class="col-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ $modulos->nome_modulo }}</h4>
-                        <p class="card-description">{{ $modulos->descricao }}</p>
-
-                        <!-- Exibir o primeiro vídeo ou a imagem do módulo -->
-                        @if($videos->isNotEmpty())
-                            <div class="mb-4">
-                                <h4 class="card-title">Primeiro Vídeo</h4>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $videos->first()->nome_video }}</h5>
-                                        <p class="card-text">{{ $videos->first()->descricao }}</p>
-                                        <a href="/videos/visualizar_video/{{$videos->first()->id}}" class="btn btn-primary">Ver Vídeo</a>
-                                        <div class="mt-2">
-                                            {!!$primeiro_video->link_video!!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @elseif($modulos->foto_modulo)
-                            <div class="mb-4">
-                                <img src="{{ asset($modulos->foto_modulo) }}" alt="Imagem do Módulo" width="300">
-                            </div>
-                        @endif
-
-                        <!-- Botão para adicionar vídeo -->
-                        @can('pode_registrar_video')
-                        <div class="mb-4">
-                            <a href="{{ route('videos.create', $modulos->id) }}" class="btn btn-gradient-primary">Adicionar Vídeo</a>
-                        </div>
-                        @endcan
-
-                        <!-- Exibir os vídeos relacionados -->
-                        <h4 class="card-title mt-4">Vídeos Relacionados</h4>
-                        <div class="row">
-                            @forelse($videos->skip(1) as $video)
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $video->nome_video }}</h5>
-                                            <p class="card-text">{{ $video->descricao }}</p>
-                                            <a href="/videos/visualizar_video/{{$video->id}}" class="btn btn-primary">Ver Vídeo</a>
-                                            <div class="mt-2">
-                                                @if($video->imagem)
-                                                    <img src="{{ asset($video->imagem) }}" alt="Imagem do Vídeo" width="100%">
-                                                @else
-                                                    N/A
-                                                @endif
-                                            </div>
-                                            <div class="mt-2">
-                                                @can('pode_editar_video')<a href="{{ route('videos.edit', $video->id) }}" class="btn btn-warning btn-sm">Editar</a>@endcan
-
-                                                <form action="{{ route('videos.destroy', $video->id) }}" method="POST" style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @can('pode_eliminar_video')<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este vídeo?');">Deletar</button>@endcan
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="col-12">
-                                    <p>Nenhum vídeo encontrado para este módulo.</p>
-                                </div>
-                            @endforelse
-                        </div>
-
-                        <!-- Links de Paginação -->
-                        <div class="mt-4">
-                            {{ $videos->links() }}
-                        </div>
-
-                        <!-- Botão Voltar -->
-                        <div class="mt-4">
-                            <a href="/modulos/listar_modulos" class="btn btn-gradient-primary">Voltar</a>
-                        </div>
-                    </div>
+            <div class="col-md-8 p-3">
+                <div class="video-container">
+                    <!-- Embed Video -->
+                    @if($primeiro_video)
+                    <p width="100%" height="450">{!! $primeiro_video->link_video !!}</p>
+                    @else
+                        <p>Nenhum vídeo disponível</p>
+                    @endif
                 </div>
+                <h4 class="mt-3" id="videoTitle">{{ $primeiro_video ? $primeiro_video->nome_video : '' }}</h4>
+                <p>Assista no <a href="{{ $primeiro_video ? $primeiro_video->link_video : '#' }}" class="text-primary" id="videoLink">YouTube</a></p>
+            </div>
+            <div class="col-md-4 p-3 bg-dark text-white">
+                <h5>{{ $modulo->nome_modulo }} <span class="float-right">0%</span></h5>
+                <ul class="timeline list-unstyled">
+                    @foreach($videos as $video)
+                        <li class="timeline-item {{ $loop->first ? 'active' : '' }}">
+                            <span class="timeline-dot"></span>
+                            <a href="#" class="text-white video-link" data-video="{{ $video->link_video }}" data-title="{{ $video->nome_video }}" data-youtube="{{ $video->link_video }}">{{ $video->nome_video }}</a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
-    <!-- content-wrapper ends -->
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 <a href="www.devaholic.ao" target="_blank">DevAholic</a>. Todos os direitos reservados.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Feito com <i class="mdi mdi-heart text-danger"></i></span>
-        </div>
-    </footer>
-    <!-- partial -->
-</div>
-<!-- main-panel ends -->
-<!-- page-body-wrapper ends -->
-</div>
-<!-- container-scroller -->
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Handler para clicar em um link de vídeo
+            $('.video-link').click(function(e) {
+                e.preventDefault();
 
-<!-- plugins:js -->
-<script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
-<!-- endinject -->
+                // Atualizar o iframe de vídeo
+                var videoSrc = $(this).data('video');
+                $('#videoFrame').attr('src', videoSrc);
 
-<!-- Plugin js for this page -->
-<script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
-<script src="{{ asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
-<!-- End plugin js for this page -->
-
-<!-- inject:js -->
-<script src="{{ asset('assets/js/off-canvas.js') }}"></script>
-<script src="{{ asset('assets/js/misc.js') }}"></script>
-<script src="{{ asset('assets/js/settings.js') }}"></script>
-<script src="{{ asset('assets/js/todolist.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.cookie.js') }}"></script>
-<!-- endinject -->
-
-<!-- Custom js for this page -->
-<script src="{{ asset('assets/js/file-upload.js') }}"></script>
-<script src="{{ asset('assets/js/typeahead.js') }}"></script>
-<script src="{{ asset('assets/js/select2.js') }}"></script>
-<!-- End custom js for this page -->
-
-@endsection
+                // Atualizar o título e o link do vídeo
+                var videoTitle = $(this).data('title');
+                var videoLink = $(this).data('youtube');
+                $('#videoTitle').text(videoTitle);
+                $('#videoLink').attr('href', videoLink);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -39,13 +39,10 @@ Route::post('/videos/store', [VideoController::class, 'store'])->name('videos.st
 
 Route::get('/videos/{id}', [videoController::class, 'show'])->name('alunos.videos.show')->middleware('auth');
 Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit')->middleware('auth');
-
 // Rota para atualizar os dados de um vídeo
 Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update')->middleware('auth');
-
 // Rota para excluir um vídeo
 Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
-
 Route::get('/videos/visualizar_video/{id}', [videoController::class,'show'])->middleware('auth');
 //Route::get('/videos/editar_video/{id}', [videoController::class,'edit'])->middleware('auth');
 //Route::put('/update_video/{id}', [videoController::class,'update'])->middleware('auth');
@@ -56,10 +53,10 @@ Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->na
 //==================Rota para Planos para o usuário=====================
 Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index'])->middleware('auth');
 Route::post('/salvar_plano_usuario', [planoUserController::class,'store'])->middleware('auth');
-Route::post('/salvar_plano_usuario', [planoUserController::class,'pagar'])->middleware('auth');
 Route::get('/plano_usuario/registar_plano_usuario', [planoUserController::class,'create'])->middleware('auth');
-Route::get('/plano_usuario/assinar_plano_usuario', [planoUserController::class,'assinarPlano'])->middleware('auth');
+Route::get('/alunos/planos/assinar_plano_usuario', [planoUserController::class,'assinarPlano'])->middleware('auth');
 Route::get('/plano_usuario/editar_plano_usuario/{id}', [planoUserController::class,'edit'])->middleware('auth');
+Route::get('/alunos/planos/editar_plano_usuario/{id}', [planoUserController::class,'editAluno'])->middleware('auth');
 Route::get('/plano_usuario/visualizar_plano_usuario/{id}', [planoUserController::class,'show'])->middleware('auth');
 Route::get('/plano_usuario/plano_individual_user', [planoUserController::class,'detalharPlano'])->middleware('auth');
 Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class,'update'])->middleware('auth');
@@ -67,6 +64,7 @@ Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class,'destroy'
 
 //==================Rota para Planos=====================
 Route::get('/planos/listar_planos', [planoController::class,'index'])->middleware('auth');
+Route::get('/alunos/planos/listar_planos', [planoController::class,'indexAluno'])->middleware('auth');
 Route::post('/salvar_plano', [planoController::class,'store'])->middleware('auth');
 Route::get('/planos/registar_plano', [planoController::class,'create'])->middleware('auth');
 Route::get('/planos/editar_plano/{id}', [planoController::class,'edit'])->middleware('auth');
@@ -89,6 +87,8 @@ Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.s
 //==================Rota para Alunos=====================
 Route::get('/alunos/modulos/listar_modulo_aluno', [ModulosController::class, 'indexAluno'])->name('modulos.indexAluno')->middleware('auth');
 Route::get('/alunos/modulos/visualizar_modulo_aluno1/{id}', [ModulosController::class,'showAluno'])->middleware('auth');
+Route::get('concluir/{id}', [ModulosController::class, 'concluirVideo1'])->middleware('auth');
+
 Route::get('/videos/{id}', [videoController::class, 'show'])->name('videos.show')->middleware('auth');
 
 

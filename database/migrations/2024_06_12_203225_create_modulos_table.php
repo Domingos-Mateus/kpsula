@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('nome_modulo');
             $table->string('descricao')->nullable();
             $table->string('foto_modulo')->nullable();
+            $table->integer('plano_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('plano_id')->references('id')->on('planos');
+
         });
     }
 

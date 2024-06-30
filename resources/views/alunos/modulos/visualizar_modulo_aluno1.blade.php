@@ -3,135 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $modulos->nome_modulo }} - Curso de Criptomoedas</title>
-    <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
-    <style>
-        /* Estilos gerais para o modo dark */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        /* Navbar */
-        .navbar.dark-mode {
-            background-color: #1e1e1e;
-            border-bottom: 1px solid #444;
-        }
-
-        .navbar .course-title.dark-mode {
-            color: #ffffff;
-        }
-
-        /* Botão de volta */
-        .back-button.dark-mode {
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #555;
-        }
-
-        /* Seções principais */
-        .main-content.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        .video-section.dark-mode .video-details h3,
-        .video-section.dark-mode .video-details p {
-            color: #ffffff;
-        }
-
-        /* Seção de vídeo */
-        .video-section.dark-mode .no-video-placeholder p {
-            color: #cccccc;
-        }
-
-        /* Barra lateral */
-        .sidebar.dark-mode {
-            background-color: #1e1e1e;
-        }
-
-        .sidebar.dark-mode h2,
-        .sidebar.dark-mode a {
-            color: #ffffff;
-        }
-
-        .sidebar.dark-mode .modules-list li a {
-            color: #bbbbbb;
-        }
-
-        .sidebar.dark-mode .modules-list li a:hover {
-            color: #ffffff;
-        }
-
-        /* Botão de alternância de módulos */
-        .toggle-modules.dark-mode {
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #555;
-        }
-
-        /* Barra de progresso */
-        .progress.dark-mode .progress-bar {
-            background-color: #444;
-        }
-
-        .progress.dark-mode span {
-            color: #ffffff;
-        }
-    </style>
+    <title>Página de Vídeo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/styles.css">
 </head>
-<body class="dark-mode">
-    <div class="navbar dark-mode">
-        <a href="/aluno_index"><button class="back-button dark-mode">← Voltar para o Portal</button></a>
-        <div class="course-title dark-mode">{{ $modulos->nome_modulo }} >
-            @if($primeiro_video)
-                {{ $primeiro_video->nome_video }}
-            @else
-                Nenhum vídeo disponível
-            @endif
+<body>
+    <br><br>
+    <div class="container-fluid">
+        <br><br><br><br>
+
+        <!-- Header -->
+        <div class="row bg-dark text-white p-2 align-items-center">
+            <div class="col">
+                <a href="/aluno_index" class="text-white"><i class="fas fa-arrow-left"></i> Voltar para o Portal</a>
+            </div>
+            <div class="col text-right">
+                <a href="concluir/{{$videos}}"><button class="btn btn-sm btn-outline-light mr-2">Marcar como concluída</button></a>
+                <button class="btn btn-sm btn-outline-light mr-2"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button class="btn btn-sm btn-outline-light mr-2">Próximo <i class="fas fa-chevron-right"></i></button>
+                <button class="btn btn-sm btn-outline-light mr-2">Anotação</button>
+                <a href="/alunos/modulos/listar_modulo_aluno"><button class="btn btn-sm btn-outline-light">Ver Módulos</button></a>
+            </div>
+        </div>
+
+        <!-- Stars Rating -->
+        <div class="row bg-dark text-white p-2">
+            <div class="col text-center">
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8 p-3">
+                <div class="video-container">
+                    <!-- Embed Video -->
+                    @if($primeiro_video)
+                    <p width="100%" height="450">{!! $primeiro_video->link_video !!}</p>
+                    @else
+                        <p>Nenhum vídeo disponível</p>
+                    @endif
+                </div>
+                <h4 class="mt-3" id="videoTitle">{{ $primeiro_video ? $primeiro_video->nome_video : '' }}</h4>
+                <p>Assista no <a href="{{ $primeiro_video ? $primeiro_video->link_video : '#' }}" class="text-primary" id="videoLink">YouTube</a></p>
+            </div>
+            <div class="col-md-4 p-3 bg-dark text-white">
+                <h5>{{ $modulo->nome_modulo }} <span class="float-right">0%</span></h5>
+                <ul class="timeline list-unstyled">
+                    @foreach($videos as $video)
+                        <li class="timeline-item {{ $loop->first ? 'active' : '' }}">
+                            <span class="timeline-dot"></span>
+                            <a href="#" class="text-white video-link" data-video="{{ $video->link_video }}" data-title="{{ $video->nome_video }}" data-youtube="{{ $video->link_video }}">{{ $video->nome_video }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="main-content dark-mode">
-        <div class="video-section dark-mode">
-            <div class="video-details">
-                @if($primeiro_video)
-                    <h3>{{ $primeiro_video->nome_video }}</h3>
-                    <p>{{ $primeiro_video->descricao }}</p>
-                @else
-                    <h3>Sem vídeo disponível</h3>
-                    <p>Nenhum vídeo foi encontrado para este módulo.</p>
-                @endif
-                <div class="rating" id="rating">
-                    <!-- Estrelas dinâmicas serão inseridas aqui -->
-                </div>
-                <!-- Ações de vídeo removidas por agora -->
-            </div>
-            @if($primeiro_video)
-                <iframe src="{{ $primeiro_video->link_video }}" frameborder="0" allowfullscreen></iframe>
-            @else
-                <div class="no-video-placeholder">
-                    <p>Nenhum vídeo disponível para este módulo.</p>
-                </div>
-            @endif
-        </div>
-        <div class="sidebar dark-mode">
-            <a href="/alunos/modulos/listar_modulo_aluno"><button class="toggle-modules dark-mode">Ver Módulos</button></a>
-            <h2>{{ $modulos->nome_modulo }}</h2>
-            <div class="progress dark-mode">
-                <div class="progress-bar" style="width: 0%;"></div>
-                <span>0%</span>
-            </div>
-            <ul class="modules-list">
-                @foreach($videos as $video)
-                    <li>
-                        <a href="{{ route('videos.show', $video->id) }}">
-                            {{ $video->nome_video }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    <script src="{{ asset('assets/script.js') }}"></script>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Handler para clicar em um link de vídeo
+            $('.video-link').click(function(e) {
+                e.preventDefault();
+
+                // Atualizar o iframe de vídeo
+                var videoSrc = $(this).data('video');
+                $('#videoFrame').attr('src', videoSrc);
+
+                // Atualizar o título e o link do vídeo
+                var videoTitle = $(this).data('title');
+                var videoLink = $(this).data('youtube');
+                $('#videoTitle').text(videoTitle);
+                $('#videoLink').attr('href', videoLink);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -28,15 +28,9 @@ class videoController extends Controller
      */
     public function create($modulo_id)
 {
-    // Buscar o módulo pelo ID
     $modulo = Modulos::findOrFail($modulo_id);
-
-    // Buscar todos os planos
-    $planos = Planos::all();
     $usuario = Auth::user();
-
-    // Retornar a view de criação de vídeo com o módulo e os planos
-    return view('videos.create', compact('modulo', 'planos','usuario'));
+    return view('videos.create', compact('modulo','usuario'));
 }
 
 
@@ -46,13 +40,15 @@ class videoController extends Controller
     // Método para armazenar um novo vídeo
     public function store(Request $request)
 {
-    $request->validate([
-        'nome_video' => 'required|string|max:255',
-        'link_video' => 'required|string', // Aceitar qualquer string
-        'descricao' => 'nullable|string|max:255',
+    $validatedData = $request->validate([
+        'link_video' => 'required|string',
+        'nome_video' => 'required|string',
+        'modulo_id' => 'required|integer',
         'imagem' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'modulo_id' => 'required|exists:modulos,id',
-        'plano_id' => 'required|exists:planos,id', // Adiciona validação para plano_id
+        'avancar' => 'boolean',
+        'recuar' => 'boolean',
+        'pausar' => 'boolean',
+        'descricao' => 'nullable|string',
     ]);
 
     $video = new Videos();
@@ -60,7 +56,6 @@ class videoController extends Controller
     $video->link_video = $request->link_video;
     $video->descricao = $request->descricao;
     $video->modulo_id = $request->modulo_id;
-    $video->plano_id = $request->plano_id; // Adiciona o campo plano_id
 
     if ($request->hasFile('imagem')) {
         $imagem = $request->file('imagem');
@@ -78,19 +73,14 @@ class videoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show1()
-    {
-        //
 
-
-    }
     public function show($id)
 {
-    $video = Videos::findOrFail($id);
-    $modulo = $video->modulo; // Supondo que existe uma relação entre Video e Modulo
+    $videos = Videos::findOrFail($id);
+    $modulo = $videos->modulo; // Supondo que existe uma relação entre Video e Modulo
     $usuario = Auth::user();
 
-    return view('videos.visualizar_video', compact('video', 'modulo', 'usuario'));
+    return view('videos.visualizar_video', compact('videos', 'modulo', 'usuario'));
 }
 
     /**

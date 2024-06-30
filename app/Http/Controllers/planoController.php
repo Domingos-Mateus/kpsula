@@ -21,6 +21,15 @@ class planoController extends Controller
         return view('planos/listar_planos', compact('planos','usuario'));
 
     }
+    public function indexAluno()
+    {
+        //
+        $planos = Planos::all();
+        $usuario = Auth::user();
+
+        return view('alunos/planos/listar_planos', compact('planos','usuario'));
+
+    }
 
     /**
      * Show the form for creating a new resource.

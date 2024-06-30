@@ -15,17 +15,20 @@ return new class extends Migration
             $table->increments('id');
             $table->text('link_video');
             $table->text('imagem')->nullable();
-            $table->boolean('avancar')->default(false); // Campo para controlar se o vídeo pode avançar
-            $table->boolean('recuar')->default(false);  // Campo para controlar se o vídeo pode recuar
+            $table->boolean('avancar')->default(false);
+            $table->boolean('recuar')->default(false);
             $table->boolean('pausar')->default(true);
+            $table->integer('posicao_video')->nullable();
+            $table->integer('avaliacao')->nullable();
+            $table->boolean('concluida')->default(false);
             $table->string('nome_video');
             $table->integer('modulo_id')->unsigned();
-            $table->integer('plano_id')->unsigned();
             $table->string('descricao')->nullable();
+            $table->integer('width')->default(500); // Define a largura padrão
+            $table->integer('height')->default(1080); // Define a altura padrão
             $table->timestamps();
 
             $table->foreign('modulo_id')->references('id')->on('modulos')->onDelete('cascade');
-            $table->foreign('plano_id')->references('id')->on('planos');
         });
     }
 

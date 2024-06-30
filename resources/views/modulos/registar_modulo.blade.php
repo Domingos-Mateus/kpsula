@@ -63,6 +63,21 @@
                         </div>
                     </div>
 
+                    <!-- Selecionar Plano -->
+                    <div class="form-group">
+                        <label for="plano_id">Plano</label>
+                        <select class="form-control" id="plano_id" name="plano_id" required>
+                            <option value="" disabled selected>Selecione um Plano</option>
+                            @foreach($planos as $plano)
+                                <option value="{{ $plano->id }}">{{ $plano->nome_plano }}</option>
+                            @endforeach
+                        </select>
+                        @error('plano_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
                       <!-- Botão de Submissão -->
                       <div class="row">
                         <div class="col-md-12 text-right">

@@ -145,23 +145,23 @@
         </div>
     </div>
 
-    <form action="/salvar_plano_usuario" method="POST" enctype="multipart/form-data">
+    <form action="/salvar_plano_usuario_aluno" method="POST" enctype="multipart/form-data">
         @csrf
-    <div class="container">
-        <h1>Escolha uma Opção</h1>
-        <div class="select-container">
-            <select name="plano_id">
-                @foreach ($planos as $plano)
-                    <option value="{{ $plano->id }}">{{ $plano->nome_plano }}</option>
-                @endforeach
-            </select>
+        <div class="container">
+            <h1>Escolha uma Opção</h1>
+            <div class="select-container">
+                <select name="plano_id">
+                    @foreach ($planos as $plano)
+                        <option value="{{ $plano->id }}">{{ $plano->nome_plano }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn btn-plan">Assinar Plano</button>
+                <a href="/alunos/planos/listar_planos"><button type="button" class="btn btn-cancel">Cancelar</button></a>
+            </div>
         </div>
-        <div class="btn-container">
-            <button type="submit" class="btn btn-plan">Assinar Plano</button>
-            <a href="/alunos/planos/listar_planos"><button class="btn btn-cancel">Cancelar</button></a>
-        </div>
-    </div>
-</form>
+    </form>
 </body>
 
 </html>

@@ -54,6 +54,7 @@ Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->na
 //==================Rota para Planos para o usuário=====================
 Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index'])->middleware('auth');
 Route::post('/salvar_plano_usuario', [planoUserController::class,'store'])->middleware('auth');
+Route::post('/salvar_plano_usuario_aluno', [planoUserController::class,'pagar'])->middleware('auth');
 Route::get('/plano_usuario/registar_plano_usuario', [planoUserController::class,'create'])->middleware('auth');
 Route::get('/alunos/planos/assinar_plano_usuario', [planoUserController::class,'assinarPlano'])->middleware('auth');
 Route::get('/plano_usuario/editar_plano_usuario/{id}', [planoUserController::class,'edit'])->middleware('auth');

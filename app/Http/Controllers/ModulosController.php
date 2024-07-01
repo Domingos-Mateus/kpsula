@@ -46,7 +46,9 @@ class ModulosController extends Controller
         $plano_usuario = PlanosUsers::where('user_id', $usuario->id)->latest()->first();
 
         if(!$plano_usuario){
-            return 'Ainda não possui nenhum plano, por favor assine!!';
+            $usuario = Auth::user();
+            $planos = Planos::all();
+            return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario'));
         }
 
 

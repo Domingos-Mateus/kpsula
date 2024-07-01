@@ -199,7 +199,6 @@ class planoUserController extends Controller
 
         $planos = Planos::all();
         $usuarios = User::all();
-        return $plano_user;
         return view('alunos/planos/editar_plano_usuario', compact('planos', 'usuarios', 'plano_user', 'usuario'));
         /*
 

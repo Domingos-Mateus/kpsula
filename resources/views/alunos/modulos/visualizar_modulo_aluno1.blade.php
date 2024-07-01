@@ -21,13 +21,49 @@
             <div class="col">
                 <a href="/aluno_index" class="text-white"><i class="fas fa-arrow-left"></i> Voltar para o Portal</a>
             </div>
+
             <div class="col text-right">
-                <a href="concluir/{{$videos}}"><button class="btn btn-sm btn-outline-light mr-2">Marcar como concluída</button></a>
-                <button class="btn btn-sm btn-outline-light mr-2"><i class="fas fa-chevron-left"></i> Anterior</button>
-                <button class="btn btn-sm btn-outline-light mr-2">Próximo <i class="fas fa-chevron-right"></i></button>
+                @if($progressoAluno->concluida)
+                    <a href="{{ route('progresso.toggle', $progressoAluno->id) }}">
+                        <button class="btn btn-sm btn-success mr-2">Concluída</button>
+                    </a>
+                @else
+                    <a href="{{ route('progresso.toggle', $progressoAluno->id) }}">
+                        <button class="btn btn-sm btn-outline-light mr-2">Marcar como concluída</button>
+                    </a>
+                @endif
+
+                @php
+                    $currentVideoIndex = $videos->search(function ($v) use ($video) {
+                        return $v->id == $video->id;
+                    });
+                @endphp
+
+                <a href="{{ $currentVideoIndex > 0 ? route('video.anterior', [$modulo->id, $video->id]) : '#' }}">
+                    <button class="btn btn-sm btn-outline-light mr-2" {{ $currentVideoIndex > 0 ? '' : 'disabled' }}>
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                </a>
+
+                <a href="{{ $currentVideoIndex < $videos->count() - 1 ? route('video.proximo', [$modulo->id, $video->id]) : '#' }}">
+                    <button class="btn btn-sm btn-outline-light mr-2" {{ $currentVideoIndex < $videos->count() - 1 ? '' : 'disabled' }}>
+                        Próximo <i class="fas fa-chevron-right"></i>
+                    </button>
+                </a>
+
                 <button class="btn btn-sm btn-outline-light mr-2">Anotação</button>
-                <a href="/alunos/modulos/listar_modulo_aluno"><button class="btn btn-sm btn-outline-light">Ver Módulos</button></a>
+                <a href="/alunos/modulos/listar_modulo_aluno">
+                    <button class="btn btn-sm btn-outline-light">Ver Módulos</button>
+                </a>
             </div>
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+
         </div>
 
         <!-- Stars Rating -->
@@ -52,20 +88,25 @@
                         <p>Nenhum vídeo disponível</p>
                     @endif
                 </div>
-                <h4 class="mt-3" id="videoTitle">{{ $primeiro_video ? $primeiro_video->nome_video : '' }}</h4>
-                <p>Assista no <a href="{{ $primeiro_video ? $primeiro_video->link_video : '#' }}" class="text-primary" id="videoLink">YouTube</a></p>
+                <h4 class="mt-3" id="videoTitle">{{ $video ? $video->nome_video : '' }}</h4>
+                <p>Assista no <a href="{{ $video ? $video->link_video : '#' }}" class="text-primary" id="videoLink">YouTube</a></p>
             </div>
             <div class="col-md-4 p-3 bg-dark text-white">
                 <h5>{{ $modulo->nome_modulo }} <span class="float-right">0%</span></h5>
                 <ul class="timeline list-unstyled">
                     @foreach($videos as $video)
-                        <li class="timeline-item {{ $loop->first ? 'active' : '' }}">
-                            <span class="timeline-dot"></span>
-                            <a href="#" class="text-white video-link" data-video="{{ $video->link_video }}" data-title="{{ $video->nome_video }}" data-youtube="{{ $video->link_video }}">{{ $video->nome_video }}</a>
+                        <li class="timeline-item {{ $video->id == $progressoAluno->video_id ? 'active' : '' }}">
+                            @if($video->id == $progressoAluno->video_id)
+                                <span class="timeline-dot"></span>
+                            @endif
+                            <a href="{{ $video->id }}" class="text-white">{{ $video->nome_video }}</a>
                         </li>
                     @endforeach
                 </ul>
             </div>
+
+
+
         </div>
     </div>
 
@@ -91,5 +132,6 @@
             });
         });
     </script>
+
 </body>
 </html>

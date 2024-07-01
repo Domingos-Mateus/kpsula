@@ -38,7 +38,7 @@ class planoController extends Controller
     {
         //
         $usuario = Auth::user();
-        return view('planos/registar_plano','usuario');
+        return view('planos/registar_plano', compact('usuario'));
     }
 
     /**

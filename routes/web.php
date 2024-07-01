@@ -8,6 +8,7 @@ use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\navController;
 use App\Http\Controllers\planoController;
 use App\Http\Controllers\planoUserController;
+use App\Http\Controllers\ProgressoAlunoController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\videoController;
 use Illuminate\Support\Facades\Route;
@@ -86,8 +87,12 @@ Route::get('/modulos/{id}', [ModulosController::class, 'show'])->name('modulos.s
 
 //==================Rota para Alunos=====================
 Route::get('/alunos/modulos/listar_modulo_aluno', [ModulosController::class, 'indexAluno'])->name('modulos.indexAluno')->middleware('auth');
-Route::get('/alunos/modulos/visualizar_modulo_aluno1/{id}', [ModulosController::class,'showAluno'])->middleware('auth');
-Route::get('concluir/{id}', [ModulosController::class, 'concluirVideo1'])->middleware('auth');
+Route::get('/alunos/modulos/visualizar_modulo_aluno1/{id}', [ModulosController::class,'showAluno'])->middleware('auth')->name('video.show');
+Route::get('concluir/{id}', [ProgressoAlunoController::class, 'marcarComoConcluido'])->middleware('auth')->name('progresso.toggle');
+
+Route::get('modulos/{modulo}/videos/{video}/anterior', [ProgressoAlunoController::class, 'showAnterior'])->name('video.anterior');
+Route::get('modulos/{modulo}/videos/{video}/proximo', [ProgressoAlunoController::class, 'showProximo'])->name('video.proximo');
+
 
 Route::get('/videos/{id}', [videoController::class, 'show'])->name('videos.show')->middleware('auth');
 

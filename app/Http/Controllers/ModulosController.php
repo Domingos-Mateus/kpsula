@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Alert;
 use App\Models\Planos;
 use App\Models\PlanosUsers;
+use App\Models\ProgressoAluno;
 use App\Models\Videos;
 use File;
 use Illuminate\Support\Facades\Auth;
@@ -127,13 +128,42 @@ class ModulosController extends Controller
     }
 
     public function showAluno($id)
-    {
-        $usuario = Auth::user();
-        $modulo = Modulos::findOrFail($id);
-        $primeiro_video = $modulo->videos()->first();
-        $videos = $modulo->videos; // Assumindo que existe uma relação `videos` no modelo Modulos
-        return view('alunos/modulos/visualizar_modulo_aluno1', compact('modulo', 'videos', 'primeiro_video', 'usuario'));
+{
+    $usuario = Auth::user();
+
+    // Encontra o vídeo pelo ID
+    $video = Videos::findOrFail($id);
+
+    // Encontra o módulo associado ao vídeo
+    $modulo = $video->modulo;
+
+    // Verifica se existe progresso para o vídeo e o usuário atual
+    $progressoAluno = ProgressoAluno::where('video_id', $video->id)
+                                      ->where('user_id', $usuario->id)
+                                      ->first();
+
+    // Caso não exista, cria um novo registro de progresso
+    if (!$progressoAluno) {
+        $progressoAluno = ProgressoAluno::create([
+            'modulo_id' => $modulo->id,
+            'video_id' => $video->id,
+            'user_id' => $usuario->id,
+            'avaliacao' => null,
+            'concluida' => false,
+        ]);
     }
+
+    // Busca todos os vídeos do módulo
+    $videos = $modulo->videos()->orderBy('posicao_video')->get();
+
+    // O primeiro vídeo do módulo pode ser o vídeo atual ou o primeiro da lista
+    $primeiro_video = $videos->first();
+
+
+    return view('alunos/modulos/visualizar_modulo_aluno1', compact('modulo', 'videos', 'primeiro_video', 'usuario', 'progressoAluno','video'));
+}
+
+
 
 
    public function concluirVideo($id)

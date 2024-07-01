@@ -19,8 +19,6 @@ return new class extends Migration
             $table->boolean('recuar')->default(false);
             $table->boolean('pausar')->default(true);
             $table->integer('posicao_video')->nullable();
-            $table->integer('avaliacao')->nullable();
-            $table->boolean('concluida')->default(false);
             $table->string('nome_video');
             $table->integer('modulo_id')->unsigned();
             $table->string('descricao')->nullable();

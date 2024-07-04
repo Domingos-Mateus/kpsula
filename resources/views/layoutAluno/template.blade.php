@@ -43,11 +43,11 @@
             margin: 20px auto;
         }
 
-        .conteudos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .conteudos0 {
             margin-top: 20px;
+            width: 100%;
+            height: 100%;
+
         }
 
         .conteudos .card {
@@ -61,18 +61,33 @@
             transition: transform 0.3s ease;
         }
 
-
-
-
         .conteudos .card:hover {
             transform: translateY(-10px);
         }
 
         .card-img-top {
-            width: 200px;
-            height: 320px;
-            object-fit: cover;
+            min-width: 200px;
+            height: 100%;
+            /*object-fit: contain;*/
             margin: auto;
+            border-radius: 0 !important;
+        }
+
+        .cursos {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            margin-bottom: 200px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .cursos li {
+            margin: 0;
+            padding: 0;
+            display: inline-block !important;
         }
     </style>
 </head>

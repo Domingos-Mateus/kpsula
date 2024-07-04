@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <form action="/atualizar_plano_usuario/{{ $plano_user->id }}" method="POST" enctype="multipart/form-data">
+    <form action="/atualizar_plano_usuario_aluno/{{ $plano_user->id }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="container">

@@ -86,7 +86,10 @@
                                 <!-- Conteúdo dinâmico será inserido aqui -->
                             </div>
                             <a href="/alunos/modulos/listar_modulo_aluno"><button id="cancelButton" class="btn btn-danger mt-3">Cancelar</button></a>
-                            <a href="/alunos/planos/editar_plano_usuario/{{ $planoUsuario->id }}"><button id="updateButton" class="btn btn-secondary mt-3" style="display: none;">Atualizar</button></a>
+                            <a href="/alunos/planos/editar_plano_usuario/{{ $planoUsuario->id }}">
+                                <button id="updateButton" class="btn btn-secondary mt-3" style="display: none;">Atualizar</button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -116,6 +119,7 @@
             </span>
         </div>
     </footer>
+
     <script>
         // Dados do plano do usuário, simulados para serem dinâmicos
         const userPlan = {
@@ -129,7 +133,7 @@
 
         // Preenchendo os dados do plano do usuário
         const userPlanContainer = document.getElementById('userPlan');
-        if (userPlan.nome_plano) {
+        if ("{{ $planoUsuario }}") {  // Verifique se o plano do usuário existe
             userPlanContainer.innerHTML = `
                 <p class="card-description">Detalhes do plano atual:</p>
                 <table class="table table-striped">
@@ -151,12 +155,10 @@
             `;
 
             // Exibir o botão de atualizar se o plano for mensal
-            if (userPlan.nome_plano.toLowerCase().includes("mensal")) {
-                document.getElementById('updateButton').style.display = 'inline-block';
-            }
+            document.getElementById('updateButton').style.display = 'inline-block';
         } else {
             userPlanContainer.innerHTML = `
-                <p class="card-description">Você ainda não possui um plano.</p>
+                <p class="card-description">Você ainda não possui um plano..</p>
                 <a href="/plano_usuario/assinar_plano_usuario" class="btn btn-primary">Assinar um Plano</a>
             `;
         }
@@ -178,7 +180,7 @@
             availablePlans.forEach(plano => {
                 plansHtml += `
                     <tr>
-                        <td> ${plano.nome_plano} </td>
+                        <td> ${plano_selecionado.nome_plano} </td>
                         <td> R$ ${plano.preco} </td>
                         <td> ${plano.data_expiracao} </td>
                     </tr>
@@ -195,5 +197,6 @@
             `;
         }
     </script>
+
 </body>
 </html>

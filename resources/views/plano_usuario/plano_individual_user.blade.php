@@ -45,7 +45,7 @@
                 </tbody>
               </table>
             @else
-              <p class="card-description">Você ainda não possui um plano.</p>
+              <p class="card-description">Você ainda não possui um plano...</p>
               <a href="/plano_usuario/assinar_plano_usuario" class="btn btn-primary">Assinar um Plano</a>
             @endif
           </div>

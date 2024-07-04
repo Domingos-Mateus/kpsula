@@ -51,7 +51,9 @@
                     </button>
                 </a>
 
-                <button class="btn btn-sm btn-outline-light mr-2">Anotação</button>
+                <!-- Botão de Anotação -->
+                <button class="btn btn-sm btn-outline-light mr-2" data-toggle="modal" data-target="#notesModal">Anotação</button>
+
                 <a href="/alunos/modulos/listar_modulo_aluno">
                     <button class="btn btn-sm btn-outline-light">Ver Módulos</button>
                 </a>
@@ -62,8 +64,6 @@
                     {{ session('status') }}
                 </div>
             @endif
-
-
         </div>
 
         <!-- Stars Rating -->
@@ -82,8 +82,8 @@
             <div class="col-md-8 p-3">
                 <div class="video-container">
                     <!-- Embed Video -->
-                    @if($primeiro_video)
-                    <p width="100%" height="450">{!! $primeiro_video->link_video !!}</p>
+                    @if($video)
+                    <p width="100%" height="450">{!! $video->link_video !!}</p>
                     @else
                         <p>Nenhum vídeo disponível</p>
                     @endif
@@ -104,9 +104,30 @@
                     @endforeach
                 </ul>
             </div>
+        </div>
+    </div>
 
-
-
+    <!-- Modal para Anotações -->
+    <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Anotações</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul id="commentList" class="list-unstyled">
+                        <!-- Comentários serão adicionados aqui -->
+                    </ul>
+                    <input type="text" id="newComment" class="form-control" placeholder="Escreva uma nova anotação...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="addComment()">Anotar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -115,23 +136,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script>
-        $(document).ready(function() {
-            // Handler para clicar em um link de vídeo
-            $('.video-link').click(function(e) {
-                e.preventDefault();
-
-                // Atualizar o iframe de vídeo
-                var videoSrc = $(this).data('video');
-                $('#videoFrame').attr('src', videoSrc);
-
-                // Atualizar o título e o link do vídeo
-                var videoTitle = $(this).data('title');
-                var videoLink = $(this).data('youtube');
-                $('#videoTitle').text(videoTitle);
-                $('#videoLink').attr('href', videoLink);
-            });
-        });
+        function addComment() {
+            var newComment = $('#newComment').val();
+            if (newComment) {
+                $('#commentList').append('<li>' + newComment + '</li>');
+                $('#newComment').val(''); // Clear the input after adding
+            }
+        }
     </script>
-
 </body>
 </html>

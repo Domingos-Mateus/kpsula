@@ -18,7 +18,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="planoDropdown">
                             <li><a class="dropdown-item" href="/alunos/planos/listar_planos">Planos</a></li>
-                            <li><a class="dropdown-item" href="#">Meu Plano</a></li>
+                            <!--<li><a class="dropdown-item" href="/alunos/planos/plano_invidual_user">Meu Plano</a></li>-->
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -51,38 +51,51 @@
             <div class="banner"></div>
         </div>
     </div>
+    <div id="cont m-0 p-0">
 
+        <br><br><br>
+        <h3 class="text-center" style="color: #fff;">Meus Modulos</h3>
 
-    <div id="cont">
-
-
-
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="main-title text-center text-white">Todos os conteúdos</h3>
+    <div class="">
+        <div class="">
+            <ul class="cursos position-relative">
+                <div style="position: absolute; top: 0; z-index: 99; color: #fff;">
+                    Recuar
                 </div>
-                <div class="conteudos">
-                    @foreach ($modulos as $modulo)
-    @if($modulo->plano_id == $plano_usuario->plano_id || $plano_usuario->plano_id == 2)
-        <a href="/alunos/modulos/visualizar_modulo_aluno1/{{ $modulo->id }}">
-            <div class="card">
+                <div style="position: absolute; top: 0; z-index: 99; right: 0; color: #fff;">
+                    Avançar
+                </div>
+                @foreach ($modulos as $modulo)
+                @if($modulo->plano_id == $plano_usuario->plano_id || $plano_usuario->plano_id == 2)
+
+                <li class="conteudos" style="color: #fff;">
+
+            <a href="/alunos/modulos/visualizar_modulo_aluno1/{{ $modulo->id }}">
+                <div class="card d-flex justify-center">
+                    <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">
+                </div>
+            </a>
+
+        </li>
+        @else
+        <li class="conteudos" style="color: #fff;">
+        <a href="/alunos/planos/editar_plano_usuario/{{ $plano_usuario->id }}">
+            <div class="card position-relative">
                 <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">
+                <div class="card-body">
+                </div>
+                <div class="position-absolute p-2" style="top: 30%; left: 50%; transform: translate(-50%);">
+                    <i class="fas fa-lock" style="color: red; font-size: 100px;"></i>
+                </div>
             </div>
         </a>
-    @else
-        <div class="card position-relative">
-            <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">
-            <div class="card-body">
-            </div>
-            <div class="position-absolute top-0 end-0 p-2">
-                <i class="fas fa-lock" style="color: red; font-size: 24px;"></i>
-            </div>
+                </li>
+                @endif
+                @endforeach
+            </ul>
         </div>
-    @endif
-@endforeach
+    </div>
 
-                </div>
-            </div>
         </div>
     </div>
 

@@ -62,6 +62,7 @@ Route::get('/alunos/planos/editar_plano_usuario/{id}', [planoUserController::cla
 Route::get('/plano_usuario/visualizar_plano_usuario/{id}', [planoUserController::class,'show'])->middleware('auth');
 Route::get('/plano_usuario/plano_individual_user', [planoUserController::class,'detalharPlano'])->middleware('auth');
 Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class,'update'])->middleware('auth');
+Route::put('/atualizar_plano_usuario_aluno/{id}', [planoUserController::class,'updateAluno'])->middleware('auth');
 Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class,'destroy'])->middleware('auth');
 
 //==================Rota para Planos=====================

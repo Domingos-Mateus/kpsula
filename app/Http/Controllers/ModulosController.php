@@ -48,7 +48,7 @@ class ModulosController extends Controller
         if(!$plano_usuario){
             $usuario = Auth::user();
             $planos = Planos::all();
-            return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario'));
+            return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario','plano_usuario'));
         }
 
 
@@ -131,6 +131,7 @@ class ModulosController extends Controller
 
     public function showAluno($id)
 {
+
     $usuario = Auth::user();
 
     // Encontra o vídeo pelo ID
@@ -138,14 +139,17 @@ class ModulosController extends Controller
 
     // Encontra o módulo associado ao vídeo
     $modulo = $video->modulo;
-
     // Verifica se existe progresso para o vídeo e o usuário atual
     $progressoAluno = ProgressoAluno::where('video_id', $video->id)
                                       ->where('user_id', $usuario->id)
                                       ->first();
 
+
+
+
     // Caso não exista, cria um novo registro de progresso
     if (!$progressoAluno) {
+
         $progressoAluno = ProgressoAluno::create([
             'modulo_id' => $modulo->id,
             'video_id' => $video->id,
@@ -154,6 +158,8 @@ class ModulosController extends Controller
             'concluida' => false,
         ]);
     }
+
+
 
     // Busca todos os vídeos do módulo
     $videos = $modulo->videos()->orderBy('posicao_video')->get();

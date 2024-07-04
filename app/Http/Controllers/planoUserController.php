@@ -53,19 +53,20 @@ class planoUserController extends Controller
         $usuario = Auth::user();
         $planos = Planos::all();
 
+        $planoUsuario = PlanosUsers::where('user_id',$usuario->id)
+        ->join('planos','planos.id','planos_users.plano_id')
+        ->select('planos_users.*','planos.nome_plano','planos.preco')
+        ->latest()
+        ->first()
+        ;
         //return $usuario;
 
         // Verifica se o usuário logado possui pelo menos um plano
-        if ($usuario->planos()->exists()) {
-            // Redireciona para outra página com uma mensagem se o usuário já possui um plano
-            $planoUsuario = $usuario->planos()->first();
-
+        if ($planoUsuario) {
             //return "Ja tem um plano";
             return view('alunos/planos/plano_individual_user', compact('planos', 'usuario', 'planoUsuario'));
         }
 
-        //return $usuario;
-        // return view('plano_usuario/registar_plano_usuario', compact('planos', 'usuario'));
         return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario'));
     }
 
@@ -133,9 +134,9 @@ class planoUserController extends Controller
 
     // Salve o modelo PlanosUsers no banco de dados
     $plano_user->save();
-    Alert::success('Salvo', 'Plano salvo com sucesso');
-    return "pago";
-    return redirect('alunos/videos/listar_modulo_aluno');
+    ///Alert::success('Salvo', 'Plano salvo com sucesso');
+    //return "pago";
+    return redirect('alunos/modulos/listar_modulo_aluno');
 }
 
 
@@ -152,7 +153,7 @@ class planoUserController extends Controller
         $usuarios = User::all();
         $usuario = Auth::user();
 
-        return view('plano_usuario/editar_plano_usuario', compact('planos', 'usuarios', 'usuario'));
+        return view('plano_usuario/editar_plano_usuario', compact('planos', 'usuarios', 'usuario','plano_user'));
     }
 
     //Detalhar o plano que o aluno obteve
@@ -166,6 +167,8 @@ class planoUserController extends Controller
         if ($usuario->planos()->exists()) {
             // Redireciona para outra página com uma mensagem se o usuário já possui um plano
             $planoUsuario = $usuario->planos()->first();
+
+
             return view('plano_usuario/plano_individual_user', compact('planos', 'usuario', 'planoUsuario'));
         }
 
@@ -193,31 +196,21 @@ class planoUserController extends Controller
     }
 
     public function editAluno(string $id)
-    {
-        $plano_user = PlanosUsers::find($id);
-        $usuario = Auth::user();
-
-        $planos = Planos::all();
-        $usuarios = User::all();
-        return view('alunos/planos/editar_plano_usuario', compact('planos', 'usuarios', 'plano_user', 'usuario'));
-        /*
-
+{
     $plano_user = PlanosUsers::find($id);
 
+
     if (!$plano_user) {
-        //return 'Plano Activo!';
 
         return redirect('/alunos/planos/editar_plano_usuario')->with('error', 'Plano de usuário não encontrado.');
     }
 
-
     $usuario = Auth::user();
     $planos = Planos::all();
     $usuarios = User::all();
-    */
+    return view('alunos.planos.editar_plano_usuario', compact('planos', 'usuarios', 'plano_user', 'usuario'));
+}
 
-        return view('alunos/planos/editar_plano_usuario', compact('planos', 'usuarios', 'plano_user', 'usuario'));
-    }
 
 
 
@@ -257,6 +250,39 @@ class planoUserController extends Controller
 
         // Redirecione para a lista de planos do usuário
         return redirect('plano_usuario/listar_plano_usuario');
+    }
+
+    public function updateAluno(Request $request, string $id)
+    {
+        $plano_user = PlanosUsers::find($id);
+
+        $plano_user->plano_id = $request->plano_id;
+        //$plano_user->user_id = $request->user_id;
+
+        $plano = Planos::find($request->plano_id);
+
+        // Verifique se o plano foi encontrado
+        if ($plano) {
+            // Calcule a nova data de expiração
+            $data_hoje = Carbon::now();
+            $data_expiracao = $data_hoje->copy()->addDays($plano->dias);
+
+            // Defina a nova data de expiração no modelo
+            $plano_user->data_expiracao = $data_expiracao;
+        } else {
+            // Plano não encontrado, pode lançar uma exceção ou tratar o erro de outra forma
+            Alert::error('Erro', 'Plano não encontrado');
+            return redirect()->back();
+        }
+
+        // Salve o modelo PlanosUsers no banco de dados
+        $plano_user->save();
+
+        // Exiba uma mensagem de sucesso
+        Alert::success('Atualizado', 'Plano atualizado com sucesso');
+
+        // Redirecione para a lista de planos do usuário
+        return redirect('alunos/modulos/listar_modulo_aluno');
     }
 
     /**

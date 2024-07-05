@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\alunoIndexController;
+use App\Http\Controllers\anotacaoController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\menuController;
 use App\Http\Controllers\ModulosController;
@@ -45,11 +46,13 @@ Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.upd
 // Rota para excluir um vídeo
 Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
 Route::get('/videos/visualizar_video/{id}', [videoController::class,'show'])->middleware('auth');
-//Route::get('/videos/editar_video/{id}', [videoController::class,'edit'])->middleware('auth');
-//Route::put('/update_video/{id}', [videoController::class,'update'])->middleware('auth');
-//Route::get('/eliminar_video/{id}', [videoController::class,'destroy'])->middleware('auth');
-
 Route::get('/videos/create/{modulo_id}', [VideoController::class, 'create'])->name('videos.create')->middleware('auth');
+
+
+//============================Rota para Anotacoes======================
+Route::get('/anotacoes/{video_id}', [anotacaoController::class, 'index']);
+    Route::post('/anotacoes', [anotacaoController::class, 'store']);
+    Route::delete('/anotacoes/{id}', [anotacaoController::class, 'destroy']);
 
 //==================Rota para Planos para o usuário=====================
 Route::get('/plano_usuario/listar_plano_usuario', [planoUserController::class,'index'])->middleware('auth');

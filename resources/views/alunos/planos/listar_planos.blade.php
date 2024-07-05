@@ -1,176 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela Estilizada</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding-top: 60px; /* Espaço para a navbar fixa */
-        }
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-        .navbar .logo {
-            font-size: 24px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .navbar .search-bar {
-            flex-grow: 1;
-            margin: 0 20px;
-        }
-        .navbar .search-bar input {
-            width: 100%;
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-        }
-        .navbar .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .navbar .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #444;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-        .navbar .dropdown-content a {
-            color: #fff;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .navbar .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1 {
-            text-align: center;
-            color: #fff;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-            text-align: left;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #444;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:hover {
-            background-color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #2a2a2a;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin: 10px 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-plan {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .btn-cancel {
-            background-color: #f44336;
-            color: white;
-        }
-        .btn-plan:hover {
-            background-color: #45a049;
-        }
-        .btn-cancel:hover {
-            background-color: #e53935;
-        }
-    </style>
-</head>
-<body>
-    <div class="navbar">
-        <a href="#" class="logo">Logo</a>
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar...">
-        </div>
-        <div class="dropdown">
-            <span>Plano</span>
-            <div class="dropdown-content">
-                <a href="#">Plano</a>
-                <a href="#">Meu Plano</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <span>Usuário</span>
-            <div class="dropdown-content">
-                <a href="#">Nome do Usuário</a>
-                <a href="#">Ajuda</a>
-                <a href="#">Perfil</a>
-                <a href="#">Sair</a>
-            </div>
+@extends('layoutAluno.template')
+
+@section('conteudo')
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/aluno_index">
+            <img src="/assets/logo/logo.png" alt="KPSULA" style="height: 50px; width: 80px; vertical-align: middle;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="planoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-family: 'Montserrat', sans-serif;">
+                        Plano
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="planoDropdown">
+                        <li><a class="dropdown-item" href="/alunos/planos/listar_planos">Planos</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-family: 'Montserrat', sans-serif;">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
+                        <li><a class="dropdown-item" href="#">Nome do Usuário</a></li>
+                        <li><a class="dropdown-item" href="#">Ajuda</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                                     onclick="event.preventDefault();
+                                                                 this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="container">
-        <h1>Tabela Estilizada</h1>
-        <div>
-            <a href="/alunos/planos/assinar_plano_usuario" class="btn btn-plan">Assinar Plano</a>
-            <a href="/aluno_index" class="btn btn-cancel">Cancelar</a>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome do Plano</th>
-                    <th>Preço</th>
-                    <th>Dias</th>
-                    <th>Descrição</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($planos as $plano)
-                <tr>
-                    <td> {{ $plano->id }} </td>
-                    <td> {{ $plano->nome_plano }} </td>
-                    <td> {{ $plano->preco }} </td>
-                    <td> {{ $plano->dias }} </td>
-                    <td> {{ $plano->descricao }} </td>
-                </tr>
-                @endforeach
-
-
-            </tbody>
-        </table>
+</nav>
+<div class="container mt-5 pt-5">
+    <h1 class="my-4" style="text-align: center; color: blue">Nossos Planos</h1>
+    <div class="mb-3">
+        <a href="/alunos/planos/assinar_plano_usuario" class="btn btn-primary">Assinar Plano</a>
+        <a href="/aluno_index" class="btn btn-secondary">Cancelar</a>
     </div>
-</body>
-</html>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome do Plano</th>
+                <th>Preço</th>
+                <th>Dias</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($planos as $plano)
+            <tr>
+                <td>{{ $plano->id }}</td>
+                <td>{{ $plano->nome_plano }}</td>
+                <td>{{ $plano->preco }}</td>
+                <td>{{ $plano->dias }}</td>
+                <td>{{ $plano->descricao }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@endsection

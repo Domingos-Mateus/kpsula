@@ -78,7 +78,7 @@
             font-size: 16px;
             border: none;
             border-radius: 5px;
-            background-color: #4caf50;
+            background-color: #0e9ba5;;
             color: white;
             appearance: none;
             outline: none;
@@ -88,7 +88,7 @@
         }
 
         select:hover {
-            background-color: #45a049;
+            background-color: #0e9ba5;;
         }
 
         .select-container::after {
@@ -118,7 +118,7 @@
         }
 
         .btn-plan {
-            background-color: #4CAF50;
+            background-color: #0e9ba5;
         }
 
         .btn-cancel {
@@ -126,7 +126,7 @@
         }
 
         .btn-plan:hover {
-            background-color: #45a049;
+            background-color: #0e9ba5;
         }
 
         .btn-cancel:hover {

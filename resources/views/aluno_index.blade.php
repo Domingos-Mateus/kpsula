@@ -6,13 +6,15 @@
             <a class="navbar-brand" href="/aluno_index">
                 <img src="/assets/logo/logo.png" alt="KPSULA" style="height: 50px; width: 80px; vertical-align: middle;">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="planoDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="planoDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
                             Plano
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="planoDropdown">
@@ -20,7 +22,8 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="perfilDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
                             Perfil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
@@ -31,7 +34,7 @@
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <x-dropdown-link :href="route('logout')"
-                                                         onclick="event.preventDefault();
+                                            onclick="event.preventDefault();
                                                                      this.closest('form').submit();">
                                             {{ __('Log Out') }}
                                         </x-dropdown-link>

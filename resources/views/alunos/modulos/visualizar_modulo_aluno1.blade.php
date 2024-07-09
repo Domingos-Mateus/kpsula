@@ -117,19 +117,25 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <ul id="commentList" class="list-unstyled">
-                        <!-- Comentários serão adicionados aqui -->
-                    </ul>
-                    <input type="text" id="newComment" class="form-control" placeholder="Escreva uma nova anotação...">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" onclick="addComment()">Anotar</button>
-                </div>
+                <form action="/anotacoes" method="post">
+                    @csrf <!-- Inclui um token CSRF para segurança -->
+                    <div class="modal-body">
+                        @foreach($anotacoes as $anotacao)
+                        <p>{{$anotacao->descricao}}</p>
+                        @endforeach
+
+                        <input type="text" name="descricao" class="form-control" placeholder="Escreva uma nova anotação...">
+                        <input type="hidden" name="video_id" value="{{ $video->id }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Anotar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

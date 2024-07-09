@@ -13,13 +13,13 @@ class anotacaoController extends Controller
         $anotacoes = anotacoes::where('video_id', $video_id)
                              ->where('user_id', Auth::id())
                              ->get();
+                             return $anotacoes;
 
         return response()->json($anotacoes);
     }
 
     public function store(Request $request)
     {
-        return 1;
         $request->validate([
             'video_id' => 'required|exists:videos,id',
             'descricao' => 'required|string',
@@ -31,7 +31,7 @@ class anotacaoController extends Controller
             'descricao' => $request->descricao,
         ]);
 
-        return response()->json($anotacao);
+        return back();
     }
 
     public function destroy($id)

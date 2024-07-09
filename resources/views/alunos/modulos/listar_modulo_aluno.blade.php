@@ -71,12 +71,21 @@
                 <ul class="cursos d-flex" id="carousel">
                     @foreach ($modulos as $modulo)
                         @if($modulo->plano_id == $plano_usuario->plano_id || $plano_usuario->plano_id == 2)
+                            @php
+                                $primeiro_video = $modulo->videos()->orderBy('posicao_video')->first();
+                            @endphp
                             <li class="conteudos" style="color: #fff;">
-                                <a href="/alunos/modulos/visualizar_modulo_aluno1/{{ $modulo->id }}">
-                                    <div class="card d-flex justify-center">
+                                @if ($primeiro_video)
+                                    <a href="/alunos/modulos/visualizar_modulo_aluno1/{{ $modulo->id }}/{{ $primeiro_video->id }}">
+                                        <div class="card d-flex justify-center">
+                                            <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">
+                                        </div>
+                                    </a>
+                                @else
+                                    <div class="card d-flex justify-center" onclick="showNoVideosModal()">
                                         <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">
                                     </div>
-                                </a>
+                                @endif
                             </li>
                         @else
                             <li class="conteudos" style="color: #fff;">
@@ -97,6 +106,24 @@
         </div>
     </div>
 
+    <!-- Modal HTML aqui -->
+    <div class="modal fade" id="noVideosModal" tabindex="-1" aria-labelledby="noVideosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noVideosModalLabel">Informação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Ainda não temos vídeo para este módulo.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById('next').addEventListener('click', function() {
             document.getElementById('carousel').scrollBy({ left: 300, behavior: 'smooth' });
@@ -105,5 +132,10 @@
         document.getElementById('prev').addEventListener('click', function() {
             document.getElementById('carousel').scrollBy({ left: -300, behavior: 'smooth' });
         });
+
+        function showNoVideosModal() {
+            var noVideosModal = new bootstrap.Modal(document.getElementById('noVideosModal'));
+            noVideosModal.show();
+        }
     </script>
 @endsection

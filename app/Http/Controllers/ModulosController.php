@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Modulos;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\anotacoes;
 use App\Models\Planos;
 use App\Models\PlanosUsers;
 use App\Models\ProgressoAluno;
@@ -45,10 +46,10 @@ class ModulosController extends Controller
 
         $plano_usuario = PlanosUsers::where('user_id', $usuario->id)->latest()->first();
 
-        if(!$plano_usuario){
+        if (!$plano_usuario) {
             $usuario = Auth::user();
             $planos = Planos::all();
-            return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario','plano_usuario'));
+            return view('alunos/planos/assinar_plano_usuario', compact('planos', 'usuario', 'plano_usuario'));
         }
 
 
@@ -64,7 +65,7 @@ class ModulosController extends Controller
             return response()->json($modulos);
         }
 
-        return view('alunos/modulos/listar_modulo_aluno', compact('modulos', 'usuario','plano_usuario'));
+        return view('alunos/modulos/listar_modulo_aluno', compact('modulos', 'usuario', 'plano_usuario'));
     }
 
 
@@ -78,7 +79,7 @@ class ModulosController extends Controller
         $planos = Planos::all();
         $usuario = Auth::user();
 
-        return view('modulos/registar_modulo', compact('usuario','planos'));
+        return view('modulos/registar_modulo', compact('usuario', 'planos'));
     }
 
     /**
@@ -98,7 +99,7 @@ class ModulosController extends Controller
         if ($request->foto_modulo) {
             $foto_modulo = $request->foto_modulo;
             $extensaoimg = $foto_modulo->getClientOriginalExtension();
-            if ($extensaoimg != 'jpg' && $extensaoimg != 'jpeg' && $extensaoimg != 'png' ) {
+            if ($extensaoimg != 'jpg' && $extensaoimg != 'jpeg' && $extensaoimg != 'png') {
                 return back()->with('Erro', 'foto_modulo com formato inválido');
             }
         }
@@ -129,27 +130,25 @@ class ModulosController extends Controller
         return view('modulos.visualizar_modulo', compact('modulos', 'videos', 'primeiro_video', 'usuario'));
     }
 
-    public function showAluno($id)
-{
 
+
+    public function showAluno($id_modulo, $id_video)
+{
     $usuario = Auth::user();
 
     // Encontra o vídeo pelo ID
-    $video = Videos::findOrFail($id);
+    $video = Videos::findOrFail($id_video);
 
-    // Encontra o módulo associado ao vídeo
-    $modulo = $video->modulo;
+    // Encontra o módulo pelo ID
+    $modulo = Modulos::findOrFail($id_modulo);
+
     // Verifica se existe progresso para o vídeo e o usuário atual
     $progressoAluno = ProgressoAluno::where('video_id', $video->id)
-                                      ->where('user_id', $usuario->id)
-                                      ->first();
-
-
-
+        ->where('user_id', $usuario->id)
+        ->first();
 
     // Caso não exista, cria um novo registro de progresso
     if (!$progressoAluno) {
-
         $progressoAluno = ProgressoAluno::create([
             'modulo_id' => $modulo->id,
             'video_id' => $video->id,
@@ -159,35 +158,38 @@ class ModulosController extends Controller
         ]);
     }
 
-
-
     // Busca todos os vídeos do módulo
     $videos = $modulo->videos()->orderBy('posicao_video')->get();
 
     // O primeiro vídeo do módulo pode ser o vídeo atual ou o primeiro da lista
     $primeiro_video = $videos->first();
 
+    // Busca todas as anotações para o vídeo e o usuário atual
+    $anotacoes = Anotacoes::where('video_id', $video->id)
+        ->where('user_id', Auth::id())
+        ->get();
 
-    return view('alunos/modulos/visualizar_modulo_aluno1', compact('modulo', 'videos', 'primeiro_video', 'usuario', 'progressoAluno','video'));
+    return view('alunos/modulos/visualizar_modulo_aluno1', compact('modulo', 'videos', 'primeiro_video', 'usuario', 'progressoAluno', 'video', 'anotacoes'));
 }
 
 
 
 
-   public function concluirVideo($id)
-{
-    return 1;
-    $usuario = Auth::user();
-    $video = Videos::findOrFail($id);
-    return $video->concluida;
 
-    // Atualizar o status do vídeo para 1
-    $video->status = 1;
-    $video->save();
+    public function concluirVideo($id)
+    {
+        return 1;
+        $usuario = Auth::user();
+        $video = Videos::findOrFail($id);
+        return $video->concluida;
 
-    // Redirecionar de volta para a página do módulo com uma mensagem de sucesso
-    return redirect()->back()->with('success', 'Vídeo marcado como concluído com sucesso!');
-}
+        // Atualizar o status do vídeo para 1
+        $video->status = 1;
+        $video->save();
+
+        // Redirecionar de volta para a página do módulo com uma mensagem de sucesso
+        return redirect()->back()->with('success', 'Vídeo marcado como concluído com sucesso!');
+    }
 
     /**
      * Show the form for editing the specified resource.

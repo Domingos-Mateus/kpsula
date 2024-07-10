@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\alunoIndexController;
 use App\Http\Controllers\anotacaoController;
+use App\Http\Controllers\bannerController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\menuController;
 use App\Http\Controllers\ModulosController;
@@ -100,6 +101,12 @@ Route::get('modulos/{modulo}/videos/{video}/proximo', [ProgressoAlunoController:
 
 
 Route::get('/videos/{id}', [videoController::class, 'show'])->name('videos.show')->middleware('auth');
+
+//============================Rota para o banner===========================
+Route::get('/listar_banner', [bannerController::class, 'index'])->name('banner/listar_banner')->middleware('auth');
+Route::get('/banner/visualizar_banner/{id}', [bannerController::class, 'show'])->name('banner/visualizar_banner')->middleware('auth');
+Route::get('/cadastrar_banner', [bannerController::class, 'create'])->name('banner/cadastrar_banner')->middleware('auth');
+Route::post('/salvar_banner', [bannerController::class, 'store'])->name('salvar_banner')->middleware('auth');
 
 
 //==================Rota para Permissões=====================

@@ -70,6 +70,19 @@
                 </ul>
               </div>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+                <span class="menu-title">Banner</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+              <div class="collapse" id="icons">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/listar_banner">Meu Banner</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
 
             @can('pode_visualizar_permissao')
             <li class="nav-item">

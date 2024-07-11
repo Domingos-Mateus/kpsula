@@ -36,7 +36,7 @@
 
         .banner {
             height: 250px;
-            background: url('/assets/capsula/img/v.jpg') no-repeat center center;
+            background: url({{$banner[0]->imagem}}) no-repeat center center;
             background-size: cover;
             border-radius: 10px;
             margin: 20px auto;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banners;
 use Illuminate\Http\Request;
 
-class alunoIndexController extends Controller
+class templateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class alunoIndexController extends Controller
     {
         //
         $banner = Banners::all();
-        return view('aluno_index', compact('banner'));
+        return view('layoutAluno.template', compact('banner'));
     }
 
     /**

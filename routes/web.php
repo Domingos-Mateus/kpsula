@@ -11,6 +11,7 @@ use App\Http\Controllers\navController;
 use App\Http\Controllers\planoController;
 use App\Http\Controllers\planoUserController;
 use App\Http\Controllers\ProgressoAlunoController;
+use App\Http\Controllers\templateController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\videoController;
 use Illuminate\Support\Facades\Route;
@@ -98,6 +99,9 @@ Route::get('concluir/{id}', [ProgressoAlunoController::class, 'marcarComoConclui
 
 Route::get('modulos/{modulo}/videos/{video}/anterior', [ProgressoAlunoController::class, 'showAnterior'])->name('video.anterior');
 Route::get('modulos/{modulo}/videos/{video}/proximo', [ProgressoAlunoController::class, 'showProximo'])->name('video.proximo');
+
+//=======================Para o template do Aluno==================
+Route::get('/layoutAluno/template', [templateController::class, 'index']);
 
 
 Route::get('/videos/{id}', [videoController::class, 'show'])->name('videos.show')->middleware('auth');

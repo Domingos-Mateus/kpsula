@@ -6,6 +6,7 @@ use App\Models\Modulos;
 use Illuminate\Http\Request;
 use Alert;
 use App\Models\anotacoes;
+use App\Models\Banners;
 use App\Models\Planos;
 use App\Models\PlanosUsers;
 use App\Models\ProgressoAluno;
@@ -43,6 +44,7 @@ class ModulosController extends Controller
     {
         $searchTerm = $request->input('search');
         $usuario = Auth::user();
+        $banner = Banners::all();
 
         $plano_usuario = PlanosUsers::where('user_id', $usuario->id)->latest()->first();
 
@@ -65,7 +67,7 @@ class ModulosController extends Controller
             return response()->json($modulos);
         }
 
-        return view('alunos/modulos/listar_modulo_aluno', compact('modulos', 'usuario', 'plano_usuario'));
+        return view('alunos/modulos/listar_modulo_aluno', compact('modulos', 'usuario', 'plano_usuario','banner'));
     }
 
 

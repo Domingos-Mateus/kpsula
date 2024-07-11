@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Planos;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Banners;
 use Illuminate\Support\Facades\Auth;
 
 class planoController extends Controller
@@ -26,8 +27,9 @@ class planoController extends Controller
         //
         $planos = Planos::all();
         $usuario = Auth::user();
+        $banner = Banners::all();
 
-        return view('alunos/planos/listar_planos', compact('planos','usuario'));
+        return view('alunos/planos/listar_planos', compact('planos','usuario','banner'));
 
     }
 

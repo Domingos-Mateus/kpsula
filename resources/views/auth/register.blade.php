@@ -15,6 +15,41 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+    <style>
+        body {
+            background-color: #121212; /* Dark background for the whole page */
+            color: #e0e0e0; /* Light text color for readability */
+        }
+
+        .auth-form-light {
+            background-color: #333333; /* Darker background for the form */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        .form-control {
+            background-color: #2a2a2a; /* Dark background for input fields */
+            color: #ffffff; /* White text color */
+            border: 1px solid #444; /* Slightly lighter border for visibility */
+        }
+
+        .btn-gradient-primary {
+            background: linear-gradient(45deg, #6a5acd, #00bcd4); /* Stylish gradient for button */
+            border: none; /* No border */
+        }
+
+        a {
+            color: #9a9cff; /* Light purple color for links for better visibility */
+        }
+
+        a:hover {
+            color: #d6d6ff; /* Lighter purple on hover */
+        }
+
+        .form-check-label {
+            color: #aaa; /* Grey text for less emphasis items */
+        }
+    </style>
 </head>
 <body>
 <div class="container-scroller">
@@ -24,17 +59,17 @@
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left p-5">
                         <div class="brand-logo">
-                            <img src="/assets/logo/logo.png">
+                            <img src="/assets/logo/logo.png" alt="logo" style="width: 300px; height: 100px;">
                         </div>
                         <h4>New here?</h4>
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                         <form class="pt-3" method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Name" :value="old('name')" required autofocus autocomplete="name">
+                                <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus autocomplete="name">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email" :value="old('email')" required autocomplete="username">
+                                <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="username">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password" required autocomplete="new-password">

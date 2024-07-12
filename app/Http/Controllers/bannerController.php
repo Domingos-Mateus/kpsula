@@ -38,11 +38,21 @@ class bannerController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'imagem' => 'nullable|image|mimes:jpg,jpeg,png'
+        'imagem' => 'required|image|mimes:jpg,jpeg,png'
     ]);
 
     // Apaga todos os registros existentes na tabela de banners.
     Banners::truncate();
+
+    // Caminho da pasta onde as imagens são armazenadas.
+    $caminhoPasta = public_path('/imagens/banner');
+
+    // Limpa todas as imagens da pasta.
+    $arquivos = glob($caminhoPasta . '/*'); // pega todos os arquivos no diretório
+    foreach ($arquivos as $arquivo) {
+        if (is_file($arquivo))
+            unlink($arquivo); // deleta o arquivo
+    }
 
     // Cria e salva um novo registro de banner.
     $banner = new Banners();
@@ -50,10 +60,11 @@ class bannerController extends Controller
     if ($request->hasFile('imagem')) {
         $imagem = $request->file('imagem');
         $extensaoimg = $imagem->getClientOriginalExtension();
-        $path = '/imagens/banner/' . $banner->id . '.' . $extensaoimg;
+        $nomeArquivo = 'banner.' . $extensaoimg;
+        $path = '/imagens/banner/' . $nomeArquivo;
 
-        // Move o arquivo da imagem para a pasta pública após obter o ID do banner.
-        $imagem->move(public_path() . '/imagens/banner', $banner->id . '.' . $extensaoimg);
+        // Move o arquivo da imagem para a pasta pública.
+        $imagem->move($caminhoPasta, $nomeArquivo);
 
         // Atualiza o registro do banner com o caminho da imagem.
         $banner->imagem = $path;
@@ -65,6 +76,7 @@ class bannerController extends Controller
     // Redireciona para a listagem de banners após o sucesso da operação.
     return redirect('/listar_banner');
 }
+
 
 
 

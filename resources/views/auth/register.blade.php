@@ -17,8 +17,8 @@
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
 
     <style>
-        body {
-            background-color: #121212; /* Dark background for the whole page */
+        div.container-scroller {
+            background-color: #121212 !important; /* Dark background for the whole page */
             color: #e0e0e0; /* Light text color for readability */
         }
 
@@ -49,15 +49,19 @@
         .form-check-label {
             color: #aaa; /* Grey text for less emphasis items */
         }
+
+        .fundo-preto{
+            background-color: black !important;
+        }
     </style>
 </head>
 <body>
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth">
+        <div class="content-wrapper d-flex align-items-center auth fundo-preto">
             <div class="row flex-grow">
                 <div class="col-lg-4 mx-auto">
-                    <div class="auth-form-light text-left p-5">
+                    <div class="auth-form-light text-left p-5 fundo-preto">
                         <div class="brand-logo">
                             <img src="/assets/logo/logo.png" alt="logo" style="width: 300px; height: 100px;">
                         </div>

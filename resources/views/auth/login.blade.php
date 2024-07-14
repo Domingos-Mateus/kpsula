@@ -20,15 +20,54 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+    <style>
+        div.container-scroller {
+            background-color: #121212 !important; /* Dark background for the whole page */
+            color: #e0e0e0; /* Light text color for readability */
+        }
+
+        .auth-form-light {
+            background-color: #333333; /* Darker background for the form */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        .form-control {
+            background-color: #2a2a2a; /* Dark background for input fields */
+            color: #ffffff; /* White text color */
+            border: 1px solid #444; /* Slightly lighter border for visibility */
+        }
+
+        .btn-gradient-primary {
+            background: linear-gradient(45deg, #6a5acd, #00bcd4); /* Stylish gradient for button */
+            border: none; /* No border */
+        }
+
+        a {
+            color: #9a9cff; /* Light purple color for links for better visibility */
+        }
+
+        a:hover {
+            color: #d6d6ff; /* Lighter purple on hover */
+        }
+
+        .form-check-label {
+            color: #aaa; /* Grey text for less emphasis items */
+        }
+
+        .fundo-preto{
+            background-color: black !important;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth">
+            <div class="content-wrapper d-flex align-items-center auth fundo-preto">
                 <div class="row flex-grow">
                     <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-left p-5">
+                        <div class="auth-form-light text-left p-5 fundo-preto">
                             <div class="brand-logo">
                                 <img src="/assets/logo/logo.png" style="width: 300px; height: 100px;">
                             </div>
@@ -63,7 +102,7 @@
                                         <a href="{{ route('password.request') }}" class="auth-link text-primary">{{ __('Forgot your password?') }}</a>
                                     @endif
                                 </div>
-                                <div class="text-center mt-4 font-weight-light"> Não tem uma conta? <a href="#" class="text-primary">Crie</a></div>
+                                <div class="text-center mt-4 font-weight-light"> Não tem uma conta? <a href="{{ route('register') }}" class="text-primary">Crie</a></div>
                             </form>
                         </div>
                     </div>

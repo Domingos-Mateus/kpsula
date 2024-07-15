@@ -63,7 +63,7 @@
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left p-5 fundo-preto">
                         <div class="brand-logo">
-                            <img src="/assets/logo/logo.png" alt="logo" style="width: 300px; height: 100px;">
+                            <img src="/imagens/logo/logo.jpg" alt="logo" style="width: 300px; height: 100px;">
                         </div>
                         <h4>New here?</h4>
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>

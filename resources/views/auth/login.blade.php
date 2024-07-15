@@ -69,7 +69,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5 fundo-preto">
                             <div class="brand-logo">
-                                <img src="/assets/logo/logo.png" style="width: 300px; height: 100px;">
+                                <img src="/imagens/logo/logo.jpg" style="width: 300px; height: 100px;">
                             </div>
                             <h4>Olá, podemos começar?</h4>
                             <h6 class="font-weight-light">Faça o login para continuar.</h6>

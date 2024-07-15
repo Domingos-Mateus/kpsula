@@ -15,13 +15,13 @@
             </div>
 
             <!-- Formulário de Adição de Módulo -->
-            <form action="/salvar_banner" method="POST" enctype="multipart/form-data">
+            <form action="/salvar_logo" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Formulário de Adição de banner</h4>
+                      <h4 class="card-title">Formulário para mudar a Logo</h4>
 
                       <div class="row">
                         <div class="col-md-6">
@@ -40,7 +40,7 @@
                       <div class="row">
                         <div class="col-md-12 text-right">
                           <button type="submit" class="btn btn-gradient-primary me-2">Registrar</button>
-                          <a href="/listar_banner" class="btn btn-light">Cancelar</a>
+                          <a href="/listar_logo" class="btn btn-light">Cancelar</a>
                         </div>
                       </div>
                     </div>

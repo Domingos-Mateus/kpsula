@@ -5,11 +5,11 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> Banner </h3>
+      <h3 class="page-title"> Logo </h3>
       <nav aria-label="breadcrumb">
         @can('pode_registrar_modulo')
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/cadastrar_banner">Mudar o Banner</a></li>
+          <li class="breadcrumb-item"><a href="/cadastrar_logo">Mudar a Logo</a></li>
         </ol>
         @endcan
       </nav>
@@ -20,7 +20,7 @@
           <div class="card-body">
 
             <br>
-            <h4 class="card-title">Banner</h4>
+            <h4 class="card-title">Logo</h4>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -31,16 +31,16 @@
                 </tr>
               </thead>
               <tbody id="modulos-tbody">
-                @foreach ($banners as $banner)
+                @foreach ($logos as $logo)
                 <tr>
-                    <td> {{ $banner->id }} </td>
+                    <td> {{ $logo->id }} </td>
                   <td class="py-1">
-                    <img src="{{ $banner->imagem }}" alt="image" />
+                    <img src="{{ $logo->imagem }}" alt="image" />
                   </td>
 
                   <td>
                     <div class="col-sm-6 col-md-4 col-lg-3">
-                      <a class="bg-warning mx-2 p-2 rounded-circle" href="/banner/visualizar_banner/{{$banner->id}}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
+                      <a class="bg-warning mx-2 p-2 rounded-circle" href="/logo/visualizar_logo/{{$logo->id}}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
                     </div>
                   </td>
                 </tr>

@@ -5,6 +5,7 @@ use App\Http\Controllers\alunoIndexController;
 use App\Http\Controllers\anotacaoController;
 use App\Http\Controllers\bannerController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\logoController;
 use App\Http\Controllers\menuController;
 use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\navController;
@@ -111,6 +112,13 @@ Route::get('/listar_banner', [bannerController::class, 'index'])->name('banner/l
 Route::get('/banner/visualizar_banner/{id}', [bannerController::class, 'show'])->name('banner/visualizar_banner')->middleware('auth');
 Route::get('/cadastrar_banner', [bannerController::class, 'create'])->name('banner/cadastrar_banner')->middleware('auth');
 Route::post('/salvar_banner', [bannerController::class, 'store'])->name('salvar_banner')->middleware('auth');
+
+
+//============================Rota para Logo===========================
+Route::get('/listar_logo', [logoController::class, 'index'])->name('logo/listar_logo')->middleware('auth');
+Route::get('/logo/visualizar_logo/{id}', [logoController::class, 'show'])->name('logo/visualizar_logo')->middleware('auth');
+Route::get('/cadastrar_logo', [logoController::class, 'create'])->name('logo/cadastrar_logo')->middleware('auth');
+Route::post('/salvar_logo', [logoController::class, 'store'])->name('salvar_logo')->middleware('auth');
 
 
 //==================Rota para Permissões=====================

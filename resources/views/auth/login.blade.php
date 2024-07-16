@@ -34,7 +34,7 @@
 
         .form-control {
             background-color: #2a2a2a; /* Dark background for input fields */
-            color: #ffffff; /* White text color */
+            color: #ffffff !important; /* White text color */
             border: 1px solid #444; /* Slightly lighter border for visibility */
         }
 

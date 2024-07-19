@@ -89,35 +89,40 @@ class ModulosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar o pedido
+        $request->validate([
+            'nome_modulo' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'plano_id' => 'required|integer',
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Criar uma nova instância do modelo Modulos
         $modulos = new Modulos;
         $modulos->nome_modulo = $request->nome_modulo;
         $modulos->descricao = $request->descricao;
         $modulos->plano_id = $request->plano_id;
 
-
-        $modulos->save();
-
-        if ($request->foto_modulo) {
-            $foto_modulo = $request->foto_modulo;
-            $extensaoimg = $foto_modulo->getClientOriginalExtension();
-            if ($extensaoimg != 'jpg' && $extensaoimg != 'jpeg' && $extensaoimg != 'png') {
-                return back()->with('Erro', 'foto_modulo com formato inválido');
-            }
+        // Verificar se o arquivo de imagem foi enviado
+        if ($request->hasFile('foto_modulo')) {
+            // Processar o novo arquivo
+            $file = $request->file('foto_modulo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path('imagens/imagem_modulo/'), $filename);
+            $modulos->foto_modulo = '/imagens/imagem_modulo/' . $filename;
         }
 
+        // Salvar o novo módulo
         $modulos->save();
 
-        if ($request->foto_modulo) {
-            File::move($foto_modulo, public_path() . '/imagens/imagem_modulo/' . $modulos->id . '.' . $extensaoimg);
-            $modulos->foto_modulo = '/imagens/imagem_modulo/' . $modulos->id . '.' . $extensaoimg;
+        // Exibir mensagem de sucesso
+        Alert::success('Cadastrado', 'Módulo cadastrado com sucesso');
 
-            $modulos->save();
-        }
-
-        Alert::success('Cadastrado', 'módulo cadastrado com sucesso');
+        // Redirecionar para a lista de módulos
         return redirect('modulos/listar_modulos');
     }
+
 
     /**
      * Display the specified resource.

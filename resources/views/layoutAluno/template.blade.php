@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Conteúdos</title>
+    <link rel="shortcut icon" href="/assets/images/favicon.png" />
+
     <link rel="stylesheet" href="/assets/capsula/css/style.css">
     <link rel="stylesheet" href="/assets/capsula/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -35,12 +37,15 @@
         }
 
         .banner {
-            height: 250px;
-            background: url({{$banner[0]->imagem}}) no-repeat center center;
-            background-size: cover;
-            border-radius: 10px;
-            margin: 20px auto;
-        }
+    align-self: center;
+    height: 500px;
+    width: 100%;
+    background: url({{$banner[0]->imagem}}) no-repeat center center;
+    background-size: cover;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
 
         .conteudos {
             margin-top: 20px;
@@ -86,6 +91,9 @@
             margin: 0;
             padding: 0;
             display: inline-block !important;
+        }
+        .dropdown-menu{
+            right: -10px;
         }
     </style>
 </head>

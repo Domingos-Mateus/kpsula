@@ -69,7 +69,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5 fundo-preto">
                             <div class="brand-logo">
-                                <img src="/imagens/logo/logo.jpg" style="width: 300px; height: 100px;">
+                                <img src="{{$logos[0]->imagem}}" style="margin: auto; display: block; width: 170px; height: 170px; border-radius: 50%">
                             </div>
                             <h4>Olá, podemos começar?</h4>
                             <h6 class="font-weight-light">Faça o login para continuar.</h6>
@@ -79,7 +79,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('login') }}" class="pt-3">
+                            <form method="POST" action="/login" class="pt-3">
                                 @csrf
                                 <div class="form-group">
                                     <x-label for="email" value="{{ __('Email') }}" />
@@ -102,7 +102,7 @@
                                         <a href="{{ route('password.request') }}" class="auth-link text-primary">{{ __('Forgot your password?') }}</a>
                                     @endif
                                 </div>
-                                <div class="text-center mt-4 font-weight-light"> Não tem uma conta? <a href="{{ route('register') }}" class="text-primary">Crie</a></div>
+                                <div class="text-center mt-4 font-weight-light"> Não tem uma conta? <a href="/register" class="text-primary">Cria</a></div>
                             </form>
                         </div>
                     </div>

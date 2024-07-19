@@ -14,11 +14,11 @@
                     <ol class="breadcrumb">
 
                         @can('pode_registrar_plano')
-                        <li class="breadcrumb-item"><a href="/planos/registar_plano">
-                                <div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-plus">Adicionar Plano
-                            </a></i>
-            </div>
-            </li>
+                            <li class="breadcrumb-item"><a href="/planos/registar_plano">
+                                    <div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-plus">Adicionar Plano
+                                </a></i>
+                </div>
+                </li>
             @endcan
             <li class="breadcrumb-item"><a href="/plano_usuario/assinar_plano_usuario">
                     <div class="col-sm-6 col-md-4 col-lg-3"><i class="fa fa-plus">Assinar
@@ -32,9 +32,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Striped Table</h4>
-                    <p class="card-description"> Add class <code>.table-striped</code>
-                    </p>
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -43,7 +41,9 @@
                                 <th> Preço </th>
                                 <th> Dias </th>
                                 <th> Descrição </th>
-                                @can('pode_registrar_plano')<th> Opções </th>@endcan
+                                @can('pode_registrar_plano')
+                                    <th> Opções </th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -63,15 +63,15 @@
                                                         style="font-size: 18px; color:black" class="fa fa-pencil"></i></a>
                                             @endcan
                                             @can('pode_eliminar_plano')
-                                            <a class="bg-warning mx-2 p-2 rounded-circle"
-                                                href="/planos/visualizar_plano/{{ $plano->id }}"><i
-                                                    style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
-                                                    @endcan
-                                                    @can('pode_eliminar_plano')
-                                            <a class="bg-danger p-2 rounded-circle"
-                                                href="/eliminar_plano/{{ $plano->id }}"><i
-                                                    style="font-size: 18px; color:black" class="fa fa-trash-o"></i></a>
-                                                    @endcan
+                                                <a class="bg-warning mx-2 p-2 rounded-circle"
+                                                    href="/planos/visualizar_plano/{{ $plano->id }}"><i
+                                                        style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
+                                            @endcan
+                                            @can('pode_eliminar_plano')
+                                                <a class="bg-danger p-2 rounded-circle"
+                                                    href="/eliminar_plano/{{ $plano->id }}"><i
+                                                        style="font-size: 18px; color:black" class="fa fa-trash-o"></i></a>
+                                            @endcan
 
 
                                         </div>

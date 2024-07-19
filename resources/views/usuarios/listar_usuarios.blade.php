@@ -16,8 +16,7 @@
               <h3 class="page-title"> Lista de usuários </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+                  <li class="breadcrumb-item"><a href="#">#</a></li>
                 </ol>
               </nav>
             </div>
@@ -25,8 +24,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Striped Table</h4>
-                    <p class="card-description"> Add class <code>.table-striped</code>
+
                     </p>
                     <table class="table table-striped">
                       <thead>
@@ -34,8 +32,8 @@
                           <th> Foto </th>
                           <th> Nome </th>
                           <th> Perfil </th>
-                          <th> Amount </th>
-                          <th> Deadline </th>
+                          <th> E-mail </th>
+                          <th> Data </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -49,7 +47,7 @@
                           <td> {{$usuario->name}} </td>
                           <td> {{$usuario->status}} </td>
                           <td> {{$usuario->email}} </td>
-                          <td> May 15, 2015 </td>
+                          <td> {{$usuario->updated_at->format('d/m/Y')}} </td>
                         </tr>
                         @endforeach
                       </tbody>

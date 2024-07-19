@@ -11,7 +11,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" style="padding-right: 80px;">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="planoDropdown" role="button"
                             data-toggle="dropdown" aria-expanded="false">
@@ -27,7 +27,7 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
-                            <li><a class="dropdown-item" href="#">Nome do Usuário</a></li>
+                            <li><a class="dropdown-item" href="#">{{$usuario->name}}</a></li>
                             <li><a class="dropdown-item" href="#">Ajuda</a></li>
                             <li>
                                 <a class="dropdown-item" href="#">
@@ -59,11 +59,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="main-title text-white" style="text-align: center;">Meus Conteúdos</h3>
+                        <br><br><br>
+            <h3  style="color: #fff; font-family: 'Montserrat', sans-serif;">Conteúdos</h3>
                     </div>
                     <a href="/alunos/modulos/listar_modulo_aluno">
                         <div class="col-md-3 mb-4">
-                            <div class="card">
+                            <div class="card" style="background-color: black">
                                 <img src="/assets/capsula/img/cap.jpg" class="card-img-top" alt="">
                                 <div class="card-body">
                                     <!-- Conteúdo do card -->

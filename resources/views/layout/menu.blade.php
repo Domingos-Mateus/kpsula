@@ -9,7 +9,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="/assets/images/faces/face1.jpg" alt="profile" />
+                  <img src="/assets/images/faces/face1.JPG" alt="profile" />
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -29,6 +29,7 @@
               </a>
             </li>
 
+            <!--
             @can('pode_visualizar_usuario')
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -45,6 +46,7 @@
               </div>
             </li>
             @endcan
+            -->
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
                 <span class="menu-title">Vídeos</span>
@@ -128,20 +130,12 @@
               </a>
               <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
+
                   <li class="nav-item">
-                    <a class="nav-link" href="#> Blank Page </a>
+                    <a class="nav-link" href="/usuarios/listar_usuarios"> Usuário </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#"> Login </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> Registro </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> 404 </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> 500 </a>
+                    <a class="nav-link" href="#"> Registro de Usuário </a>
                   </li>
                 </ul>
               </div>

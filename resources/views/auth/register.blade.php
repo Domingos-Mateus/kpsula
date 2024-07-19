@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Registro</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/ti-icons/css/themify-icons.css">
@@ -63,11 +63,11 @@
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left p-5 fundo-preto">
                         <div class="brand-logo">
-                            <img src="/imagens/logo/logo.jpg" alt="logo" style="width: 300px; height: 100px;">
+                            <img src="{{$logos[0]->imagem}}" style="margin: auto; display: block; width: 150px; height: 150px; border-radius: 50%">
                         </div>
                         <h4>New here?</h4>
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-                        <form class="pt-3" method="POST" action="{{ route('register') }}">
+                        <form class="pt-3" method="POST" action="/register">
                             @csrf
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus autocomplete="name">
@@ -96,7 +96,7 @@
                                 <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                             </div>
                             <div class="text-center mt-4 font-weight-light">
-                                Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
+                                Already have an account? <a href="/login" class="text-primary">Login</a>
                             </div>
                         </form>
                     </div>

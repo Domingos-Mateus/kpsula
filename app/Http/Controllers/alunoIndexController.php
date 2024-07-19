@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banners;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class alunoIndexController extends Controller
 {
@@ -14,7 +15,8 @@ class alunoIndexController extends Controller
     {
         //
         $banner = Banners::all();
-        return view('aluno_index', compact('banner'));
+        $usuario = Auth::user();
+        return view('aluno_index', compact('banner','usuario'));
     }
 
     /**

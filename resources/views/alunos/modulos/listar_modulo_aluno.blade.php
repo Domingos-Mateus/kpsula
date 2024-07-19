@@ -10,7 +10,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" style="padding-right: 80px;">
                     <li class="nav-item">
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" name="search" type="search" placeholder="Pesquisar" aria-label="Search" value="{{ request('search') }}">
@@ -21,7 +21,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="planoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-family: 'Montserrat', sans-serif;">
                             Plano
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="planoDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="planoDropdown" style="right: -10px;">
                             <li><a class="dropdown-item" href="/alunos/planos/listar_planos">Planos</a></li>
                         </ul>
                     </li>
@@ -29,8 +29,8 @@
                         <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-family: 'Montserrat', sans-serif;">
                             Perfil
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
-                            <li><a class="dropdown-item" href="#">Nome do Usuário</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="perfilDropdown" style="right: -10px;">
+                            <li><a class="dropdown-item" href="#">{{$usuario->name}}</a></li>
                             <li><a class="dropdown-item" href="#">Ajuda</a></li>
                             <li>
                                 <a class="dropdown-item" href="#">
@@ -59,7 +59,8 @@
         </div>
         <div id="cont m-0 p-0">
             <br><br><br>
-            <h3 class="text-center" style="color: #fff; font-family: 'Montserrat', sans-serif;">Meus Módulos</h3>
+            <h5  style="color: #fff; font-family: 'Montserrat', sans-serif;"><a href="/aluno_index" style="color: #fff; text-decoration: none;">Home</a> > <a href="/alunos/modulos/listar_modulo_aluno" style="color: #fff; text-decoration: none;">KPsula Cripto</a></h5><br><br>
+            <h3  style="color: #fff; font-family: 'Montserrat', sans-serif;">Todos os Módulos</h3>
 
             <div class="d-flex justify-content-between align-items-center position-relative">
                 <button class="btn btn-outline-light" id="prev" style="height: 320px; display: flex; align-items: center; border: none; background-color: #000000; position: absolute; top: 0; left: 0; z-index: 10;">
@@ -68,13 +69,13 @@
                 <button class="btn btn-outline-light" id="next" style="height: 320px; display: flex; align-items: center; border: none; background-color: #000000; position: absolute; top: 0; right: 0; z-index: 10;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
-                <ul class="cursos d-flex" id="carousel">
+                <ul class="cursos" id="carousel">
                     @foreach ($modulos as $modulo)
                         @if($modulo->plano_id == $plano_usuario->plano_id || $plano_usuario->plano_id == 2)
                             @php
                                 $primeiro_video = $modulo->videos()->orderBy('posicao_video')->first();
                             @endphp
-                            <li class="conteudos" style="color: #fff;">
+                            <li class="conteudos" style="color: #fff; width: auto !important;">
                                 @if ($primeiro_video)
                                     <a href="/alunos/modulos/visualizar_modulo_aluno1/{{ $modulo->id }}/{{ $primeiro_video->id }}">
                                         <div class="card d-flex justify-center">
@@ -88,7 +89,7 @@
                                 @endif
                             </li>
                         @else
-                            <li class="conteudos" style="color: #fff;">
+                            <li class="conteudos" style="color: #fff; width: auto !important;">
                                 <a href="/alunos/planos/editar_plano_usuario/{{ $plano_usuario->id }}">
                                     <div class="card position-relative">
                                         <img src="{{ $modulo->foto_modulo }}" class="card-img-top" alt="Descrição da imagem">

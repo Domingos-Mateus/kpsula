@@ -114,11 +114,13 @@ Route::get('/cadastrar_banner', [bannerController::class, 'create'])->name('bann
 Route::post('/salvar_banner', [bannerController::class, 'store'])->name('salvar_banner')->middleware('auth');
 
 
-//============================Rota para Logo===========================
+//============================Rota para Logo, Login & Register===========================
 Route::get('/listar_logo', [logoController::class, 'index'])->name('logo/listar_logo')->middleware('auth');
 Route::get('/logo/visualizar_logo/{id}', [logoController::class, 'show'])->name('logo/visualizar_logo')->middleware('auth');
 Route::get('/cadastrar_logo', [logoController::class, 'create'])->name('logo/cadastrar_logo')->middleware('auth');
 Route::post('/salvar_logo', [logoController::class, 'store'])->name('salvar_logo')->middleware('auth');
+Route::get('/login', [logoController::class, 'login']);
+Route::get('/register', [logoController::class, 'register']);
 
 
 //==================Rota para Permissões=====================
@@ -132,9 +134,11 @@ Route::post('/salvar_permissions_roles', 'App\Http\Controllers\adminController@s
 Route::post('/criar_token_acesso', 'App\Http\Controllers\adminController@criar_token_acesso')->middleware('auth');
 
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
+
 Route::get('/usuarios.listar_usuarios', function () {
     return view('usuarios/listar_usuarios')->middleware('auth');
 })->middleware('auth');
@@ -146,6 +150,7 @@ Route::get('/', function () {
 Route::get('/login1', function () {
     return view('auth/login1');
 });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -164,3 +169,4 @@ Route::middleware([
     })->name('dashboard')->middleware('auth');
 */
 })->middleware('auth');
+

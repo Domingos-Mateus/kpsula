@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('layout.app')
 
 @section('conteudo')
     <br><br><br><br><br>

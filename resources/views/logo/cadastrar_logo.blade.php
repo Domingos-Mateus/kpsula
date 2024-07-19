@@ -26,7 +26,7 @@
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Carregar Imagem</label>
+                                <label class="col-sm-3 col-form-label">Carregar a Logo</label>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="imagem" name="imagem" required>

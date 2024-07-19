@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/favicon.png" />
     <title>Página de Vídeo</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -112,7 +113,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="notesModalLabel">Anotações</h5>
+                    <h5 class="modal-title" id="notesModalLabel" style="color: gray;">Anotações</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -121,7 +122,7 @@
                     @csrf <!-- Inclui um token CSRF para segurança -->
                     <div class="modal-body">
                         @foreach($anotacoes as $anotacao)
-                        <p>{{$anotacao->descricao}}</p>
+                        <p style="color: blue;">{{$anotacao->descricao}}</p>
                         @endforeach
 
                         <input type="text" name="descricao" class="form-control" placeholder="Escreva uma nova anotação...">

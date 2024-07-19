@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class logoController extends Controller
 {
+
+
+    public function login()
+    {
+        $logos = Logos::all();
+        return view('auth/login', compact('logos'));
+    }
+
+
+    public function register()
+    {
+        //
+        $logos = Logos::all();
+        return view('auth/register', compact('logos'));
+    }
     /**
      * Display a listing of the resource.
      */

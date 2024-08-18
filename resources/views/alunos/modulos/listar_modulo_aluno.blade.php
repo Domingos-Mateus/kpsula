@@ -23,7 +23,9 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="planoDropdown" style="right: -10px;">
                             <li><a class="dropdown-item" href="/alunos/planos/listar_planos">Planos</a></li>
+                            <li><a class="dropdown-item" href="/autenticar_ticto">Pagar Plano</a></li>
                         </ul>
+
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-family: 'Montserrat', sans-serif;">

@@ -71,6 +71,9 @@ Route::put('/atualizar_plano_usuario/{id}', [planoUserController::class, 'update
 Route::put('/atualizar_plano_usuario_aluno/{id}', [planoUserController::class, 'updateAluno'])->middleware('auth');
 Route::get('/eliminar_plano_usuario/{id}', [planoUserController::class, 'destroy'])->middleware('auth');
 
+Route::get('/autenticar_ticto', [planoUserController::class, 'pagamentoTicto'])->middleware('auth');
+
+
 //==================Rota para Planos=====================
 Route::get('/planos/listar_planos', [planoController::class, 'index'])->middleware('auth');
 Route::get('/alunos/planos/listar_planos', [planoController::class, 'indexAluno'])->middleware('auth');

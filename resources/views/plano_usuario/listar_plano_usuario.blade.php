@@ -49,7 +49,7 @@
 
                             <div class="col-sm-6 col-md-4 col-lg-3">
                             <a class="bg-primary p-2 rounded-circle" href="/plano_usuario/editar_plano_usuario/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-pencil"></i></a>
-                            <a class="bg-warning mx-2 p-2 rounded-circle" href="/planos/visualizar_plano/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
+                            <a class="bg-warning mx-2 p-2 rounded-circle" href="/plano_usuario/editar_plano_usuario/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-eye"></i></a>
                             <a class="bg-danger p-2 rounded-circle" href="/eliminar_plano_usuario/{{ $plano_usuario->id }}"><i style="font-size: 18px; color:black" class="fa fa-trash-o"></i></a>
 
                             </div>

@@ -10,6 +10,8 @@ use Alert;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+
 
 class planoUserController extends Controller
 {
@@ -138,6 +140,144 @@ class planoUserController extends Controller
     //return "pago";
     return redirect('alunos/modulos/listar_modulo_aluno');
 }
+
+
+
+
+public function pagamentoTicto(Request $request) {
+    // Obter as credenciais da API
+    $client_id = '9cc83dfa-5f6b-4a3f-ba23-9671bc3b9eb8';
+    $client_secret = 'zQzodv9FTKjoWyJgthH6zHxWbureAI8u4tOsWLcFQuBsTdMDz3RTsOVBMFdaWr2Oq';
+    $grant_type = 'client_credentials';
+
+    // Fazer a requisição para obter o token
+    $response = Http::asForm()->post('https://glados.ticto.cloud/api/security/oauth/token', [
+        'grant_type' => $grant_type,
+        'client_id' => $client_id,
+        'client_secret' => $client_secret,
+        'scope' => '*',
+    ]);
+
+    // Verificar se a requisição foi bem-sucedida
+    if ($response->successful()) {
+        // Obter o token de acesso da resposta
+        $access_token = $response->json()['access_token'];
+
+        // Agora você pode usar o token para fazer outras requisições na API
+        // Exemplo: Resumo de pedidos
+        $orderSummaryResponse = Http::withToken($access_token)
+            ->get('https://glados.ticto.cloud/api/v1/orders/summary');
+
+        if ($orderSummaryResponse->successful()) {
+            $orderSummary = $orderSummaryResponse->json();
+            // Tratar os dados do resumo aqui
+        } else {
+            return response()->json(['error' => 'Erro ao obter o resumo de pedidos'], 500);
+        }
+
+        // Adicione a lógica adicional para processar o pagamento aqui
+        // ...
+
+        return $access_token;
+    } else {
+        // Em caso de falha na autenticação, retorne uma mensagem de erro
+        return response()->json(['error' => 'Falha na autenticação'], 401);
+    }
+
+}
+
+
+    public function sumaryTicto(Request $request) {
+        // Obter as credenciais da API
+        $client_id = '9cc83dfa-5f6b-4a3f-ba23-9671bc3b9eb8';
+        $client_secret = 'zQzodv9FTKjoWyJgthH6zHxWbureAI8u4tOsWLcFQuBsTdMDz3RTsOVBMFdaWr2Oq';
+        $grant_type = 'client_credentials';
+
+        // Fazer a requisição para obter o token
+        $authResponse = Http::asForm()->post('https://glados.ticto.cloud/api/security/oauth/token', [
+            'grant_type' => $grant_type,
+            'client_id' => $client_id,
+            'client_secret' => $client_secret,
+            'scope' => '*',
+        ]);
+
+        // Verificar se a requisição foi bem-sucedida
+        if ($authResponse->successful()) {
+            // Obter o token de acesso da resposta
+            $access_token = $authResponse->json()['access_token'];
+
+            // Usar o token para obter o resumo dos pedidos
+            $summaryResponse = Http::withToken($access_token)
+                ->get('https://glados.ticto.cloud/api/v1/orders/summary');
+
+            if ($summaryResponse->successful()) {
+                // Obter os dados do resumo
+                $summaryData = $summaryResponse->json();
+
+                // Retornar os dados em formato JSON
+                return response()->json([
+                    'total' => $summaryData['total'],
+                    'total_items' => $summaryData['total_items'],
+                    'bump_total' => $summaryData['bump_total'],
+                    'upsell_total' => $summaryData['upsell_total'],
+                    'commission_sum' => $summaryData['commission_sum']
+                ]);
+            } else {
+                // Retornar erro se a chamada para obter o resumo falhar
+                return response()->json(['error' => 'Erro ao obter o resumo dos pedidos'], 500);
+            }
+        } else {
+            // Em caso de falha na autenticação, retorne uma mensagem de erro
+            return response()->json(['error' => 'Falha na autenticação'], 401);
+        }
+    }
+
+        public function historyTicto(Request $request) {
+            // Obter as credenciais da API
+            $client_id = '9cc83dfa-5f6b-4a3f-ba23-9671bc3b9eb8';
+            $client_secret = 'zQzodv9FTKjoWyJgthH6zHxWbureAI8u4tOsWLcFQuBsTdMDz3RTsOVBMFdaWr2Oq';
+            $grant_type = 'client_credentials';
+
+            // Fazer a requisição para obter o token
+            $authResponse = Http::asForm()->post('https://glados.ticto.cloud/api/security/oauth/token', [
+                'grant_type' => $grant_type,
+                'client_id' => $client_id,
+                'client_secret' => $client_secret,
+                'scope' => '*',
+            ]);
+
+            // Verificar se a requisição foi bem-sucedida
+            if ($authResponse->successful()) {
+                // Obter o token de acesso da resposta
+                $access_token = $authResponse->json()['access_token'];
+
+                // Usar o token para obter o histórico dos pedidos
+                $page = $request->get('page', 1); // Obter o número da página, padrão é 1
+                $historyResponse = Http::withToken($access_token)
+                    ->get("https://glados.ticto.cloud/api/v1/orders/history?page={$page}");
+
+                if ($historyResponse->successful()) {
+                    // Obter os dados do histórico
+                    $historyData = $historyResponse->json();
+
+                    // Retornar os dados em formato JSON
+                    return response()->json([
+                        'data' => $historyData['data'],
+                        'links' => $historyData['links'],
+                        'meta' => $historyData['meta'],
+                    ]);
+                } else {
+                    // Retornar erro se a chamada para obter o histórico falhar
+                    return response()->json(['error' => 'Erro ao obter o histórico de pedidos'], 500);
+                }
+            } else {
+                // Em caso de falha na autenticação, retorne uma mensagem de erro
+                return response()->json(['error' => 'Falha na autenticação'], 401);
+            }
+        }
+
+
+
 
 
 

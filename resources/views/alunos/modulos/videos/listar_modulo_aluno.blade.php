@@ -89,6 +89,7 @@
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                     <li><a class="dropdown-item" href="#">Planos</a></li>
                     <li><a class="dropdown-item" href="#">Meu Plano</a></li>
+                    <li><a class="dropdown-item" href="#">Meu Plano</a></li>
                 </ul>
             </div>
             <div class="dropdown">

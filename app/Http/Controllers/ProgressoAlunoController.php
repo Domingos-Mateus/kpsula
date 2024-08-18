@@ -20,23 +20,24 @@ class ProgressoAlunoController extends Controller
         return redirect()->back()->with('status', $progressoAluno->concluida ? 'Progresso marcado como concluído!' : 'Progresso desmarcado como concluído!');
     }
 
-    public function showAnterior($moduloId, $videoId)
-    {
-        $modulo = Modulos::findOrFail($moduloId);
-        $videos = $modulo->videos()->orderBy('posicao_video')->get();
-        $currentVideoIndex = $videos->search(function ($video) use ($videoId) {
-            return $video->id == $videoId;
-        });
+   public function showAnterior($moduloId, $videoId)
+{
+    $modulo = Modulos::findOrFail($moduloId);
+    $videos = $modulo->videos()->orderBy('posicao_video')->get();
+    $currentVideoIndex = $videos->search(function ($video) use ($videoId) {
+        return $video->id == $videoId;
+    });
 
-        if ($currentVideoIndex > 0) {
-            $previousVideo = $videos[$currentVideoIndex - 1];
-            return redirect()->route('video.show', [$previousVideo->id]);
-        }
-
-        return redirect()->back()->with('status', 'Não há vídeo anterior.');
+    if ($currentVideoIndex > 0) {
+        $previousVideo = $videos[$currentVideoIndex - 1];
+        return redirect()->route('video.show', [$moduloId, $previousVideo->id]);
     }
 
-    public function showProximo($moduloId, $videoId)
+    return redirect()->back()->with('status', 'Não há vídeo anterior.');
+}
+
+
+public function showProximo($moduloId, $videoId)
 {
     $modulo = Modulos::findOrFail($moduloId);
     $videos = $modulo->videos()->orderBy('posicao_video')->get();
@@ -46,8 +47,8 @@ class ProgressoAlunoController extends Controller
 
     if ($currentVideoIndex < $videos->count() - 1) {
         $nextVideo = $videos[$currentVideoIndex + 1];
-        $url = route('video.show', [$nextVideo->id]);
-        return redirect()->to($url);
+        // Redireciona para a rota que exibe o próximo vídeo
+        return redirect()->route('video.show', [$moduloId, $nextVideo->id]);
     }
 
     return redirect()->back()->with('status', 'Não há próximo vídeo.');

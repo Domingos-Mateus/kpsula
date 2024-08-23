@@ -115,29 +115,22 @@ class planoUserController extends Controller
     $plano_user = new PlanosUsers;
 
     $plano_user->plano_id = $request->plano_id;
-    $plano_user->user_id = auth()->id(); // Obtendo o ID do usuário autenticado
+    $plano_user->user_id = auth()->id();
 
-    // Obtenha o plano associado ao plano_id
     $plano = Planos::find($request->plano_id);
 
-    // Verifique se o plano foi encontrado
     if ($plano) {
-        // Calcule a data de expiração
         $data_hoje = Carbon::now();
         $data_expiracao = $data_hoje->copy()->addDays($plano->dias);
 
-        // Defina a data de expiração no modelo
         $plano_user->data_expiracao = $data_expiracao;
     } else {
-        // Plano não encontrado, pode lançar uma exceção ou tratar o erro de outra forma
         Alert::error('Erro', 'Plano não encontrado');
         return redirect()->back();
     }
 
-    // Salve o modelo PlanosUsers no banco de dados
     $plano_user->save();
-    ///Alert::success('Salvo', 'Plano salvo com sucesso');
-    //return "pago";
+
     return redirect('alunos/modulos/listar_modulo_aluno');
 }
 
@@ -163,6 +156,12 @@ public function pagamentoTicto(Request $request) {
         // Obter o token de acesso da resposta
         $access_token = $response->json()['access_token'];
 
+        // Armazenar o token na sessão
+        session(['access_token' => $access_token]);
+
+           // Recuperar o token da sessão
+        $access_token = session('access_token');
+
         // Agora você pode usar o token para fazer outras requisições na API
         // Exemplo: Resumo de pedidos
         $orderSummaryResponse = Http::withToken($access_token)
@@ -178,14 +177,12 @@ public function pagamentoTicto(Request $request) {
         // Adicione a lógica adicional para processar o pagamento aqui
         // ...
 
-        return $access_token;
+        return response()->json(['access_token' => $access_token]);
     } else {
         // Em caso de falha na autenticação, retorne uma mensagem de erro
         return response()->json(['error' => 'Falha na autenticação'], 401);
     }
-
 }
-
 
     public function sumaryTicto(Request $request) {
         // Obter as credenciais da API
